@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'product/product_create.css' %}"/>
+{% endblock %}
+{% block title %}
+Add Product
+{% endblock %}
+{% block content %}
+<form class="container" style="color:gray" method="POST">
+        <header class="heading">Update Product Information :</header><hr></hr>
+            {{form.as_p}}
+            {% csrf_token %}
+        <center> <button id="submit" type="submit" class="btn btn-primary">Update</button></center>
+</form>
+{% endblock %}

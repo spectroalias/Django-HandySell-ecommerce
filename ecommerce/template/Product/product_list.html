@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'initials/index.css' %}"/>
+<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet"> 
+{% endblock %}
+{% block title %}
+HandySell
+{% endblock %}
+{% block content %}
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+
+  </ol>
+
+      <div class="carousel-inner" role="listbox">
+  
+        <div class="item active">
+          <img src="{% static 'initials/sliderIMG/1.jpeg' %}" alt="Handicrafts1" style="width: 100%;">
+          <div class="carousel-caption lessfancy"><h3>Our  Products  Include  Intricately  Embroidered  Cushion  Covers,  Bags  With  Original  Designs , A  Variety  Of  Wood  Carving , Hong  Tze  Collection </h3></div>
+            <div class="carousel-head carousel-content fancyfonts">
+              <!-- {% if user.is_anonymous %}
+              <h2 style="color:rgb(155, 121, 28);">Wanna Sell Something ?</h2>
+              <button type="button" class="btn btn-primary"><strong>Send Request To Admin</strong></button>
+              {% endif %} -->
+          </div>
+        </div>
+        
+        <div class="item lessfancy">
+            <img src="{% static 'initials/sliderIMG/4.jpeg' %}" alt="Handicrafts3" style="width: 100%;">
+            <div class="carousel-content carousel-mid" style="color:rgb(136, 60, 99);"><center class="double"><h1>The Best Collection Of World Handicrafts</h1></center>
+            <center><h3>We Bring You A Variety Of Unique And High-Quality Handicrafts Produced By Artisans From Different Countries Around The World </h3></center>
+          </div>
+        </div>
+          
+          <div class="item">
+              <img src="{% static 'initials/sliderIMG/5.jpeg' %}" alt="Handicrafts3" style="width: 100%;">
+              <div class="carousel-content carousel-mid" style="color:rgb(236, 255, 62);"><center class="double"><h1>High-Quality Handicrafts Produced</h1></center>
+                <center><h3>
+                  Shop Online From The Best Collection Of World Handicrafts - Home Decor Items, Designer Jewelry, Scarves And Fashion Accessories </h3></center>
+              </div>
+            </div>
+      </div>
+  
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+  <br><br>
+  <div class="container">
+    {% for item in object_list %}
+    <div class="col-sm-4">            
+      <div class="thumbnail">
+          <div class="caption">
+              <h4 class="centered"; style="color:rgb(0,0,0);">{{item.title}}</h4>
+              <div style="color:rgb(0,0,0);">Price:Rs {{item.price}}/-</div>
+              <p class="centered"; style="color:rgb(0,0,0);font-size:15px;">comments: {{item.comments.count}}</p>
+              <p><a href="{% url 'product_detail' pk=item.pk %}" class="label label-danger">Details</a>
+              {% if user.is_authenticated %}
+              <a href="" class="label label-default">Add to cart</a></p>
+              {% endif %}
+            </div>
+              <img src={{item.image}} alt="Lights" class="img-fluid" style="width:100%; height:300px; ">
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+    <div class="parallax" style="height:120px;color:black;background-image:url(https://images.pexels.com/photos/1297938/pexels-photo-1297938.jpeg?auto=compress&cs=tinysrgb&h=650&w=940);">
+        <br>
+        <center><h1 class="fancyfonts">No more products for now</h1></center>
+    
+    <br><br>
+    <!-- footer form -->
+        <div class="container" style="color:white;">
+          <form id="contentForm" method="POST">
+            <h2 class="text-uppercase ct-header ct-header--smaller ct-header--underline">We are ready for Help.</h2>
+            <div class="form-divider"></div>
+            <p id="eval-anchor">Thanks again for looking over our website and considering us for help with your project. Please take a moment and fill out as much of the form below as you can, and someone will quickly respond to your inquiry.</p>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label class="sr-only" for="name">Name</label>
+                  <input name="name" id="name" class="form-control validate[required]" type="text" value="" placeholder="Name *">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="sr-only" for="email">Email</label>
+                  <input name="email" id="email" class="form-control validate[required,custom[email]]" type="email" value="" placeholder="Email *">
+                  <input type="hidden" name="formfields[fromEmail]" id="fromEmail" value="">
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="sr-only" for="phone">Phone</label>
+                  <input name="phone" id="phone" class="form-control h5-phone validate[required,custom[phone]]" type="tel" value="" placeholder="Phone *"> 
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="sr-only" for="company">Company / Organization</label>
+                  <input name="company" id="company" class="form-control validate[required]" type="text" value="" placeholder="Company / Organization *">
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group form-group--wide">
+              <label class="sr-only" for="details">How Can We Help You?</label>
+              <textarea name="details" rows="5" id="details" class="form-control validate[required]" placeholder="How Can We Help You? *" cols="30"></textarea>
+              <br><button class="btn btn-primary btn-form" type="submit">Send</button>
+            </div>
+          </form>
+      </div>
+    </div>
+{% endblock %}

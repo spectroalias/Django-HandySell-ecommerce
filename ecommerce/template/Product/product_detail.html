@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'product/product_detail.css' %}"/>
+{% endblock %}
+{% block title %}
+Craft View
+{% endblock %}
+{% block content %}
+<div class="card">
+        <div class="row">
+            <aside class="col-sm-6 border-right container">
+    <article class="gallery-wrap"> 
+    <div class="img-big-wrap">
+      <div><img src={{product.image}}></div>
+    </div> <!-- slider-product.// -->
+            </aside>
+            <aside class="col-sm-5 border-left container">
+    <article class="card-body p-5">
+        <h2 class="title mb-3">{{product.title}}</h2> 
+        <h4 class="title mb-2">seller: <b>{{product.seller}}</b></h4>
+        {% if user.is_authenticated %}
+    <a href="{% url 'product_update' pk=product.pk %}" class="glyphicon glyphicon-edit">edit</a>
+    {% endif %}
+    <br><br>
+    <p class="price-detail-wrap"> 
+        <span class="price h3 text-warning"> 
+            <span class="currency">Price: INR </span><span class="num">{{product.price}}</span>
+        </span> 
+    </p> <!-- price-detail-wrap .// -->
+    <dl class="item-property">
+      <dt><h3>Description</h3></dt>
+      <dd><h4>{{product.description}}</h4></dd>
+    </dl> <!-- item-property-hor .// -->
+    {% comment %} <dl class="param param-feature">
+      <dt>Color</dt>
+      <dd>Black and white</dd>
+    </dl>  <!-- item-property-hor .// --> {% endcomment %}
+    <dl class="param param-feature">
+      <dt>Delivery Possible</dt>
+      <dd>India,Russia,USA,and Europe</dd>
+    </dl>  <!-- item-property-hor .// -->
+    
+    <hr><hr><br>
+        <div class="row">
+            {% comment %} <div class="col-sm-5">
+                <dl class="param param-inline">
+                  <dt>Quantity: </dt>
+                  <dd>
+                      <select class="form-control form-control-sm" style="width:50px;height:5px;">
+                          <option> 1 </option>
+                          <option> 2 </option>
+                          <option> 3 </option>
+                      </select>
+                  </dd>
+                </dl>  <!-- item-property .// -->
+            </div> <!-- col.// --> {% endcomment %}
+        <hr>
+        {% if user.is_authenticated %}
+        <a href="#" class="btn btn-lg btn-primary text-uppercase glyphicon glyphicon-cart"> Add to cart</a>
+        <hr>
+        <a href="{% url 'add_comment' pk=product.pk %}" class="btn btn-lg btn-outline-primary text-uppercase"> <i class="fas fa-shopping-cart"></i> Add comment</a>
+        <hr><hr><hr><hr>
+        <a href="{% url 'product_delete' pk=product.pk %}" class="btn btn-lg btn-danger text-uppercase"> <i class="fas fa-shopping-cart"></i> Delete</a>
+            
+        {% endif %}
+    </article> <!-- card-body.// -->
+            </aside> <!-- col.// -->
+        </div> <!-- row.// -->
+        <div class="container" style="color:black;"> <!-- card.// -->
+            {% for comment in product.comments.all %}
+            <div class="container">
+               <a href="{% url 'comment_detail' pk=comment.pk  %}"> <hr><h4>{{comment.text}}</h4></a>
+                <p style="color:;">by: {{comment.author}} on {{comment.created_date}}</p>
+            </div>
+            {% endfor %}
+            </div>
+    </div> 
+</div>
+{% endblock %}

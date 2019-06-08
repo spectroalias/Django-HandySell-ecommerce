@@ -1,0 +1,6 @@
+    <form method="GET" class="my-lg-0 my-2" action="{% url 'search:{{request.GET.q}}' %}">
+        <div class="input-group">
+            <input type="text" class="form-control small long" placeholder="Search products" name="q">
+            <button class="btn btn-default small" type="submit"><i class="btn btn-outline-success glyphicon glyphicon-search"></i></button>
+        </div>>
+    </form>

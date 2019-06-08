@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'product/product_detail.css' %}"/>
+{% endblock %}
+{% block title %}
+User Info
+{% endblock %}
+{% block content %}
+<div class="card">
+    <div class="row">
+        <aside class="col-sm-5 border-left container">
+    <article class="card-body p-5">
+        <h2 class="title mb-3">{{user.username}}</h2> 
+    <a href="{% url 'user_update' pk=user.pk %}" class="glyphicon glyphicon-edit">EditInformation</a>
+    <br><br>
+    <a href="{% url 'change_password' %}" class="glyphicon glyphicon-edit">ChangePassword</a>
+    <br><br>
+    <dl class="item-property">
+
+      <dt><h3>Email:</h3></dt>
+      <h4 class="title mb-3">{{ user.email }}</h4>
+    <br><br><br>
+        <a href="{% url 'user_delete' pk=user.pk %}" class="btn btn-lg btn-danger text-uppercase"> <i class="fas fa-shopping-cart"></i> Delete</a>
+    </article> 
+    </aside>
+    </div> 
+    
+    
+    </div>
+{% endblock %}

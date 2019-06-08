@@ -1,0 +1,21 @@
+.container{
+    max-width: 400px;
+    margin-top:100px;
+    height:350px;
+    background-image:url("https://images.pexels.com/photos/1087727/pexels-photo-1087727.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    //background-repeat: no-repeat;
+    color: white;
+    border-style: 1px solid grey;
+    box-shadow: 2px 5px 5px 0px black;
+}
+.heading{
+    text-decoration:bold;
+    text-align : center;
+    font-size:30px;
+    color:#F96;
+    padding-top:20px;
+}
+body{
+   background-image:url("https://static.vecteezy.com/system/resources/previews/000/094/691/non_2x/abstract-pattern-background-vector.jpg");
+
+}

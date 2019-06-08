@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'initials/login.css' %}"/>
+{% endblock %}
+{% block title %}
+Confirm Delete
+{% endblock %}
+{% block content %}
+    <!---heading----> 
+            <form method="post" class="container">  {% csrf_token %}
+                    <center><h2>Are you sure you want to delete the Product</center>
+                    <center><button type="submit" class="btn btn-danger" value="confirm">delete Product</button></center>                    
+                </form>
+{% endblock %}
