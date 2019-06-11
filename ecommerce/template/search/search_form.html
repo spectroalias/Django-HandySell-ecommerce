@@ -1,6 +1,9 @@
-    <form method="GET" class="my-lg-0 my-2" action="{% url 'search:{{request.GET.q}}' %}">
-        <div class="input-group">
-            <input type="text" class="form-control small long" placeholder="Search products" name="q">
-            <button class="btn btn-default small" type="submit"><i class="btn btn-outline-success glyphicon glyphicon-search"></i></button>
-        </div>>
-    </form>
+<form method='GET' action="{% url 'search:query' %}" class="form my-2 my-lg-0 ">
+<div class='input-group'>
+  <input class="form-control" type="text" value='{{request.GET.q}}' name='q' placeholder="Search" aria-label="Search">
+  <span class='input-group-btn'>
+    <button class="btn btn-success" type="submit">Search</button>
+  </span>
+</div>
+</form>
+{% comment %}action="{% url 'search:{{request.GET.q}}' %}" {% endcomment %}

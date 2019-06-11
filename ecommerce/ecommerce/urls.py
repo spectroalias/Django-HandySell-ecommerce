@@ -39,7 +39,7 @@ urlpatterns = [
     path(r'product/<int:pk>/comment/$',add_comment,name='add_comment'),
     path(r'comment/<int:pk>/detail$',comment_detail.as_view(),name='comment_detail'),
     path(r'comment/<int:pk>/delete$',comment_remove,name='comment_delete'),
-    path(r'search/$', include('search.urls')),
+    path(r'search/', include('search.urls',namespace='search')),
 
 ]
 

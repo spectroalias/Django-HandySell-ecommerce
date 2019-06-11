@@ -12,12 +12,12 @@ Handysell
 {% endif %}
 {% endblock %}
 {% block content %}
-  <div class="container">
+  <div class="container mt-5 pt-5">
     {% if request.GET.q %}
-    searched for {{request.GET.q}}
-    {% else %}
-    {% include 'search/search_form.html' %}
+    <strong style="color:white">searched for {{request.GET.q}}</strong>
     {% endif %}
+    {% include 'search/search_form.html' %}
+  
     {% for item in object_list %}
     <div class="col-sm-4">            
       <div class="thumbnail">

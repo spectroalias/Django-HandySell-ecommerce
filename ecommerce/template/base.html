@@ -34,7 +34,7 @@
             <li class="nav-item active"><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
           </ul>
             <ul class="navbar-center navbar-nav nav small">
-          {% comment %} {% include 'search/search_form.html' %} {% endcomment %}
+
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
@@ -52,6 +52,8 @@
             {% endif %}
             <li><a href="{% url 'about_us' %}"><span class="glyphicon glyphicon-info-sign"></span> AboutUs</a></li>
             <li><a href="{% url 'contact_us' %}"><span class="glyphicon glyphicon-earphone"></span> ContactUs</a></li>
+            <li>{% include 'search/search_form.html' %}</li>
+            
           </ul>
         </div>
 </nav>
