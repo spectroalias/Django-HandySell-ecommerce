@@ -7,7 +7,7 @@
 Login
 {% endblock %}
 {% block content %}
-        <form class="container" method="post">
+        <form class="container container-my" method="post">
          <header class="heading"> Login</header><hr></hr>
          {% csrf_token %}
           <center>{{ form.as_p }}</center>

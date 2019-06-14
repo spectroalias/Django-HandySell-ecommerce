@@ -18,7 +18,7 @@ from django.urls import path,include
 from .views import index,about_us,contact_us,LogoutView,LoginView, RegisterView,UpdateUserView,UserDetailView,DeleteUserView,change_password
 from django.conf import settings
 from django.conf.urls.static import static
-from Product.views import ProductListView ,ProductDetailView,comment_detail,DeleteProductView,CreateProductView,UpdateProductView,add_comment, comment_remove
+from Product.views import ProductListView ,ProductDetailView,comment_detail,DeleteProductView,UpdateProductView,add_comment, comment_remove,add_product
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,7 +32,7 @@ urlpatterns = [
     path('myself/<int:pk>/',UserDetailView.as_view(),name="user_detail"),
     path('user/delete/<int:pk>/',DeleteUserView.as_view(),name="user_delete"),
     path('product/delete/<int:pk>/',DeleteProductView.as_view(),name="product_delete"),
-    path('create/',CreateProductView.as_view(),name="product_create"),
+    # path('create/',CreateProductView.as_view(),name="product_create"),
     path('update/product/<int:pk>/',UpdateProductView.as_view(),name="product_update"),
     path('update/user/<int:pk>/',UpdateUserView.as_view(),name="user_update"),
     path(r'password/$',change_password, name='change_password'),
@@ -40,6 +40,8 @@ urlpatterns = [
     path(r'comment/<int:pk>/detail$',comment_detail.as_view(),name='comment_detail'),
     path(r'comment/<int:pk>/delete$',comment_remove,name='comment_delete'),
     path(r'search/', include('search.urls',namespace='search')),
+    path('product_add/',add_product,name='add_product'),
+
 
 ]
 

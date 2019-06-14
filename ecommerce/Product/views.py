@@ -4,7 +4,7 @@ from .models import Product,Comment
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
-from .forms import CommentForm
+from .forms import CommentForm,ProductForm
 from django.contrib.auth import get_user
 
 # Create your views here.
@@ -26,10 +26,10 @@ class DeleteProductView(DeleteView,LoginRequiredMixin):
     model = Product
     success_url=reverse_lazy('home')
 
-class CreateProductView(LoginRequiredMixin,CreateView):
-    model=Product
-    fields=('title','description','price','image')
-    redirect_field_name ='Product/Product_list.html'
+# class CreateProductView(LoginRequiredMixin,CreateView):
+#     model=Product
+#     fields=('title','description','price','image')
+#     redirect_field_name ='Product/Product_list.html'
 
 class UpdateProductView(LoginRequiredMixin,UpdateView):
     model = Product
@@ -67,3 +67,18 @@ class comment_detail(DetailView,LoginRequiredMixin):
     template_name = "Product/comment_detail.html"
     def get_object(self):
         return get_object_or_404(Comment,pk=self.kwargs.get('pk'))
+
+# working just fine...
+@login_required
+def add_product(request):
+    form=ProductForm()
+    if request.method == 'POST':
+        form=ProductForm(request.POST)
+        if form.is_valid():
+            product=form.save(commit=False)
+            product.seller=get_user(request)
+            product=form.save()
+            return redirect('home')
+        else:
+            form=ProductForm()
+    return render(request,'Product/product_form.html',{'form':form})

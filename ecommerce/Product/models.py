@@ -2,11 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
+from django.contrib.auth import get_user_model,get_user
 from django.utils.timezone import now
 
 
 class Product(models.Model):
-    seller      = models.ForeignKey(User,on_delete=models.CASCADE,default=User.is_active)
+    seller      = models.ForeignKey(get_user_model(),on_delete=models.CASCADE,default=User)
     title       = models.CharField(max_length=150)
     description = models.TextField(null=True)
     price       = models.PositiveSmallIntegerField()
