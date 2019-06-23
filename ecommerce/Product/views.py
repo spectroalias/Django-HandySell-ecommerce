@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from .forms import CommentForm,ProductForm
 from django.contrib.auth import get_user
-
+from cart.models import Cart
 # Create your views here.
 
 
@@ -19,6 +19,13 @@ class ProductDetailView(DetailView):
     model=Product
     context_object_name='product'
     template_name = "Product/product_detail.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super(ProductDetailView,self).get_context_data(**kwargs)
+        cart,new=Cart.objects.new_or_get(self.request)
+        context["cart"] = cart
+        return context
+    
     def get_object(self):
         return get_object_or_404(Product,pk=self.kwargs.get('pk'))
 

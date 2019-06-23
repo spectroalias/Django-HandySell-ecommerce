@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'product/product_detail.css' %}"/>
+{% endblock %}
+{% block title %}
+My Cart
+{% endblock %}
+{% block content %}
+<br><br><br><br><br>
+    <div class='container'>
+    {% for item in cart.products.all %}
+        <div class="jumbotron container" style='padding:0px'>
+            <div class="row">
+                <aside class="col-sm-3 border-right container">
+                    <img src={{item.image}} alt="Lights" class="img-fluid" style="height:60%; ">
+                </aside>
+                <aside class="col-sm-4 border-left container">
+                    <article class="card-body p-5">
+                        <h2 class="title mb-1"><b>{{item.title}}</b></h2> 
+                        <h4 class="title mb-1">seller:{{item.seller}}</h4>
+                        <br><br>
+                        <p class="price-detail-wrap"> 
+                            <span class="price h3 text-warning"> 
+                                <span class="currency">Price: INR </span><span class="num">{{item.price}}</span>
+                            </span>
+                            <br><br> 
+                        {% comment %} {% include 'cart/cart_update.html' with product=product cart=cart %} {% endcomment %}
+                        </p>
+                    </article> <!-- card-body.// -->
+                </aside> <!-- col.// -->
+            </div> <!-- row.// -->
+        </div>
+    {% endfor %}
+    <div class='jumbotron container'>
+        <h2>Your cart items amount to (in INR): {{cart.sub_total}}</h2>
+        <h2>Amount to pay include tax (in INR): {{cart.total}}</h2>
+
+    </div>
+    </div>
+{% endblock %}

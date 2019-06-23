@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'product/product_detail.css' %}"/>
 {% endblock %}
 {% block title %}
-Craft View
+Product Details
 {% endblock %}
 {% block content %}
 <div class="card">
@@ -56,13 +56,12 @@ Craft View
                 </dl>  <!-- item-property .// -->
             </div> <!-- col.// --> {% endcomment %}
         <hr>
+        {% include 'cart/cart_update.html' with product=product cart=cart %}
         {% if user.is_authenticated %}
-        <a href="#" class="btn btn-lg btn-primary text-uppercase glyphicon glyphicon-cart"> Add to cart</a>
         <hr>
         <a href="{% url 'add_comment' pk=product.pk %}" class="btn btn-lg btn-outline-primary text-uppercase"> <i class="fas fa-shopping-cart"></i> Add comment</a>
         <hr><hr><hr><hr>
-        <a href="{% url 'product_delete' pk=product.pk %}" class="btn btn-lg btn-danger text-uppercase"> <i class="fas fa-shopping-cart"></i> Delete</a>
-            
+        {% comment %} <a href="{% url 'product_delete' pk=product.pk %}" class="btn btn-lg btn-danger text-uppercase"> <i class="fas fa-shopping-cart"></i> Delete</a> {% endcomment %}
         {% endif %}
     </article> <!-- card-body.// -->
             </aside> <!-- col.// -->

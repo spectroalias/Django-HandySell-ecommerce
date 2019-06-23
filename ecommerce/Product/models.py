@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.urls import reverse
 from django.contrib.auth import get_user_model,get_user
 from django.utils.timezone import now
+from django.db.models.signals import m2m_changed
 
 
 class Product(models.Model):

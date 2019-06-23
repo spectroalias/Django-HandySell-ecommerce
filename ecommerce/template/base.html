@@ -42,7 +42,6 @@
               <a class="dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Hi {{user.username}}</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">  
                 <a class="dropdown-item glyphicon glyphicon-pencil" href="{% url 'user_detail' pk=user.pk %}"> My Information</a>
-                <a class="dropdown-item glyphicon glyphicon-shopping-cart" href="#"> My Cart</a>
                 <a class="dropdown-item" href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout </a>
               </div>
             </li>
@@ -52,8 +51,8 @@
             {% endif %}
             <li><a href="{% url 'about_us' %}"><span class="glyphicon glyphicon-info-sign"></span> AboutUs</a></li>
             <li><a href="{% url 'contact_us' %}"><span class="glyphicon glyphicon-earphone"></span> ContactUs</a></li>
+            <li><a class="glyphicon glyphicon-shopping-cart" href="{% url 'cart:home' %}">Cart</a></li>
             <li>{% include 'search/search_form.html' %}</li>
-            
           </ul>
         </div>
 </nav>
