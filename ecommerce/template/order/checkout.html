@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'product/product_detail.css' %}"/>
+{% endblock %}
+{% block title %}
+Complete your checkout
+{% endblock %}
+{% block content %}
+<br><br><br><br><br>
+    
+    <div class='container jumbotron text-center'>
+    {% if not bill_profile %}
+        <div class='text-center container'>
+            <div class='col-12 col-md-6'><strong>Login</strong>
+            {% include 'order/snippets/login_form.html' with form=form next_url=request.build_absolute_uri %}
+            </div>
+            <div class='col-12 col-md-6'><a><strong>Continue as Guest</strong></a>
+            {% include 'order/snippets/guest_login.html' with form=guest_form next_url=request.build_absolute_uri %}            
+            </div>
+        </div>
+    {% else %}
+        <h1 style='text-align:center'>Checkout</h1><table class='text-center container'>
+        <tr>
+            <td><h3>Order id :</h3></td>
+            <td><h3>{{order.order_id}}</h3></td>
+        </tr>
+        <tr>
+            <td><h3>Shipping Total :</h3></td>
+            <td><h3>{{order.shipping_total}}</h3></td>
+        </tr>
+        <tr>
+            <td><h3>Total amount to pay :</h3></td>
+            <td><h3>{{order.total}}</h3></td>
+        </tr>
+        </table>
+    {% endif %}
+    </div>
+{% endblock %}

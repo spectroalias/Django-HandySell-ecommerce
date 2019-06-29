@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.models import User
-from .forms import UserLoginForm,UserRegisterForm
+from .forms import UserLoginForm,UserRegisterForm,GuestForm
 from django.contrib.auth import login ,authenticate ,logout,get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -10,6 +10,8 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.core.exceptions import  ValidationError
+from django.utils.http import is_safe_url
+from .models import GuestUser
 # Create your views here.
 def index(request):
     return render(request,"index.html",{})
@@ -22,18 +24,38 @@ def contact_us(request):
 
 def LoginView(request):
     form=UserLoginForm(request.POST or None)
+    next_=request.GET.get('next')
+    next_post=request.POST.get('next')
+    redirect_urls=next_ or next_post or None
     if form.is_valid():
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
-           login(request, user)
-           return redirect('/home')
+            login(request, user)
+            if is_safe_url(redirect_urls,request.get_host()):
+                return redirect(redirect_urls)
+            else:
+                return redirect('/home')
         else:
             raise ValidationError('Invalid uname or password', code='invalid')
     return render(request,"auth/login.html",{'form':form})
 
-User=get_user_model()
+def GuestView(request):
+    form=GuestForm(request.POST or None)
+    next_=request.GET.get('next')
+    next_post=request.POST.get('next')
+    redirect_urls=next_ or next_post or None
+    if form.is_valid():
+        email = request.POST['email']
+        GuestUser.objects.create(email=email)
+        request.session['guest_email_id']=email
+        if is_safe_url(redirect_urls,request.get_host()):
+            return redirect(redirect_urls)
+        else:
+            return redirect('/register')
+    return redirect('/register')
+
 def RegisterView(request):
     form=UserRegisterForm(request.POST or None)
     if form.is_valid():
@@ -47,7 +69,7 @@ def RegisterView(request):
 @login_required
 def LogoutView(request):
     logout(request)
-    return redirect('/home')
+    return redirect('/login')
 
 class UpdateUserView(LoginRequiredMixin,UpdateView):
     model = User
@@ -61,8 +83,6 @@ class UserDetailView(DetailView,LoginRequiredMixin):
     template_name = "auth/user_detail.html"
     def get_object(self):
         return get_object_or_404(User,pk=self.kwargs.get('pk'))
-
-    
 
 class DeleteUserView(DeleteView,LoginRequiredMixin):
     model = User

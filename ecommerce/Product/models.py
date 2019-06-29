@@ -13,7 +13,7 @@ class Product(models.Model):
     description = models.TextField(null=True)
     price       = models.PositiveSmallIntegerField()
     image       = models.URLField(max_length=150)
-    arrival_date= models.DateTimeField(default=now())
+    arrival_date= models.DateTimeField(auto_now=True)
     # representation
     def comments(self):
         return self.comments.all()
@@ -29,7 +29,7 @@ class Comment(models.Model):
     product     =models.ForeignKey('Product.product',related_name='comments',on_delete=models.CASCADE)
     author      =models.CharField(default=User.username, max_length=150)
     text        =models.TextField(max_length=200)
-    created_date=models.DateTimeField(default=now())
+    created_date=models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.text

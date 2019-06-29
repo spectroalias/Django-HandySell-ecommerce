@@ -3,6 +3,6 @@ from search.views import SearchListView
 app_name='search'
 
 urlpatterns = [
-    path(r"$",SearchListView.as_view(),name="query"),
+    path("",SearchListView.as_view(),name="query"),
 
 ]

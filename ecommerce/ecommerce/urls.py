@@ -35,13 +35,14 @@ urlpatterns = [
     # path('create/',CreateProductView.as_view(),name="product_create"),
     path('update/product/<int:pk>/',UpdateProductView.as_view(),name="product_update"),
     path('update/user/<int:pk>/',UpdateUserView.as_view(),name="user_update"),
-    path('password/$',change_password, name='change_password'),
-    path('product/<int:pk>/comment/$',add_comment,name='add_comment'),
-    path('comment/<int:pk>/detail$',comment_detail.as_view(),name='comment_detail'),
-    path('comment/<int:pk>/delete$',comment_remove,name='comment_delete'),
+    path('password/',change_password, name='change_password'),
+    path('product/<int:pk>/comment/',add_comment,name='add_comment'),
+    path('comment/<int:pk>/detail',comment_detail.as_view(),name='comment_detail'),
+    path('comment/<int:pk>/delete',comment_remove,name='comment_delete'),
     path('search/', include('search.urls',namespace='search')),
     path('product_add/',add_product,name='add_product'),
     path('cart/', include('cart.urls',namespace='cart')),
+    path('order/', include('order.urls',namespace='order')),
 
 
 ]

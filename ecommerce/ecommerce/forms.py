@@ -5,10 +5,13 @@ User=get_user_model()
 class UserLoginForm(forms.Form):
     username=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control" ,"placeholder":"Enter Your Username"}))
     password=forms.CharField(widget=forms.PasswordInput(attrs={"class":"form-control","placeholder":"Enter Your Password"}))
-    
+
+class GuestForm(forms.Form):
+    Email=forms.EmailField(widget=forms.TextInput(attrs={"class":"form-control mail","placeholder":"Type Your Email",'required':'True'}))
+
 class UserRegisterForm(forms.Form):
     Username=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control name" ,"placeholder":"Enter Your Username"}))
-    Email=forms.EmailField(widget=forms.TextInput(attrs={"class":"form-control mail","placeholder":"Type Your Email"}))
+    Email=forms.EmailField(widget=forms.TextInput(attrs={"class":"form-control mail","placeholder":"Type Your Email",'required':'True'}))
     Password=forms.CharField(widget=forms.PasswordInput(attrs={"class":"form-control pass","placeholder":"Enter Your Password"}))
     Confirm_password=forms.CharField(label="Confirm password",widget=forms.PasswordInput(attrs={"class":"form-control pass","placeholder":"Confirm Your Password"}))
 

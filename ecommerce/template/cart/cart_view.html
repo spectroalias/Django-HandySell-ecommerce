@@ -35,7 +35,7 @@ My Cart
     <div class='jumbotron container'>
         <h2>Your cart items amount to (in INR): {{cart.sub_total}}</h2>
         <h2>Amount to pay include tax (in INR): {{cart.total}}</h2>
-
+        <a class="btn btn-success" href='{% url 'order:checkout' %}'>Checkout</a>  
     </div>
     </div>
 {% endblock %}
