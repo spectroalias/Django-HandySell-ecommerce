@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from .views import index,about_us,contact_us,LogoutView,LoginView, RegisterView,UpdateUserView,UserDetailView,DeleteUserView,change_password
+from accounts.views import index,about_us,contact_us,LogoutView,LoginView, RegisterView,UpdateUserView,UserDetailView,DeleteUserView,change_password,GuestView
 from django.conf import settings
 from django.conf.urls.static import static
 from Product.views import ProductListView ,ProductDetailView,comment_detail,DeleteProductView,UpdateProductView,add_comment, comment_remove,add_product
@@ -25,6 +25,7 @@ urlpatterns = [
     path('home/',ProductListView.as_view(), name="home"),
     path('about_us/', about_us,name="about_us"),
     path('contact_us/', contact_us,name="contact_us"),
+    path('login/guest/',GuestView,name="guest_login"),
     path('login/',LoginView,name="login"),
     path('register/',RegisterView,name="register"),
     path('logout/',LogoutView,name="logout"),

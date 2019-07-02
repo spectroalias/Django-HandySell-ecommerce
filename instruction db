@@ -1,0 +1,1 @@
+--run-syncdb # if encounter any migration table related problems

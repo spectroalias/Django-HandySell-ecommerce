@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.signals import post_save,pre_save
 from .utils import order_id_generator
 from cart.models import Cart
+from billprofile.models import BillingProfile
 # Create your models here.
 
 Order_Status=(
@@ -13,8 +14,8 @@ Order_Status=(
 
 
 class Order(models.Model):
+    billing_profle  =models.ForeignKey(BillingProfile, on_delete=models.CASCADE,null=True,blank=True)
     order_id        =models.CharField(max_length=50,blank=True)
-    # billing profle
     # ship add
     # bill add
     cart            =models.ForeignKey(Cart,on_delete=models.CASCADE)

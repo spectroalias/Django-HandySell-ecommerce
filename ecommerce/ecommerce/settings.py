@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'order',
     'billprofile',
     'ecommerce',
+    'accounts',
 ]
 
 MIDDLEWARE = [
