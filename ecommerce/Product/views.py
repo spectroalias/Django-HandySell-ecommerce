@@ -1,12 +1,12 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.views.generic import ListView ,DetailView,DeleteView ,CreateView ,UpdateView
-from .models import Product,Comment
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
-from .forms import CommentForm,ProductForm
+from .forms import ProductForm
 from django.contrib.auth import get_user
 from cart.models import Cart
+from .models import Product
 # Create your views here.
 
 
@@ -14,6 +14,12 @@ class ProductListView(ListView):
     model = Product
     qs=Product.objects.all()
     template_name = "Product/Product_list.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super(ProductListView,self).get_context_data(**kwargs)
+        cart,new=Cart.objects.new_or_get(self.request)
+        context["cart"] = cart
+        return context
 
 class ProductDetailView(DetailView):
     model=Product
@@ -44,36 +50,6 @@ class UpdateProductView(LoginRequiredMixin,UpdateView):
     template_name='Product/product_update.html'
     redirect_field_name='Product/product_detail.html'
 
-# comment section
-@login_required
-def comment_remove(request,pk):
-    comment=get_object_or_404(Comment,pk=pk)
-    Product_pk=comment.product.pk
-    comment.delete()
-    return redirect('product_detail',pk=Product_pk)
-
-@login_required
-def add_comment(request,pk):
-    product=get_object_or_404(Product,pk=pk)
-    form=CommentForm()
-    if request.method == 'POST':
-        form=CommentForm(request.POST)
-        if form.is_valid():
-            comment=form.save(commit=False)
-            comment.author=get_user(request)
-            comment.product=product
-            comment=form.save()
-            return redirect('product_detail',pk=product.pk)
-        else:
-            form=CommentForm()
-    return render(request,'Product/comment_form.html',{'form':form,'product':product})
-
-class comment_detail(DetailView,LoginRequiredMixin):
-    model=Comment
-    context_object_name='comment'
-    template_name = "Product/comment_detail.html"
-    def get_object(self):
-        return get_object_or_404(Comment,pk=self.kwargs.get('pk'))
 
 # working just fine...
 @login_required

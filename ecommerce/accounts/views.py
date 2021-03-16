@@ -12,9 +12,8 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.core.exceptions import  ValidationError
 from django.utils.http import is_safe_url
 from .models import GuestUser
+
 # Create your views here.
-def index(request):
-    return render(request,"index.html",{})
 
 def about_us(request):
     return render(request,"about.html",{})

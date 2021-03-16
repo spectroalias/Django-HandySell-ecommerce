@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'initials/login.css' %}"/>
 {% endblock %}
@@ -10,10 +10,10 @@ Login
         <form class="container container-my" method="post">
          <header class="heading"> Login</header><hr></hr>
          {% csrf_token %}
-          <center>{{ form.as_p }}</center>
+          <center>{{ form.as_table }}</center>
           <center> <button id="submit" type="submit" class="btn btn-success">Sign in</button></center>
           {% if user.is_anonymous %}
-          <br><br><center><a href="{% url 'register' %}" role="button">- Not Having an account -</a></center>
+          <br><br><center><a href="{% url 'accounts:register' %}" role="button">- Not Having an account -</a></center>
           {% endif %}
         </form>
 {% endblock %}

@@ -4,5 +4,4 @@ app_name='search'
 
 urlpatterns = [
     path("",SearchListView.as_view(),name="query"),
-
 ]

@@ -1,5 +1,5 @@
- <form class="container jumbotron" method="POST" action='{% url 'login' %}'>{% csrf_token %}
+ <form class="container jumbotron" method="POST" action='{% url 'account:login' %}'>{% csrf_token %}
     {% if next_url %}<input type='hidden' name='next' value='{{ next_url }}'/>{% endif %}      
-    <center>{{ form.as_p }}</center>
+    <center>{{ form.as_table }}</center>
     <center> <button id="submit" type="submit" class="btn btn-success">Sign in</button></center>
 </form>

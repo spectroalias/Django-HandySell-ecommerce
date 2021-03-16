@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'product/product_create.css' %}"/>
 {% endblock %}
@@ -9,7 +9,7 @@ Add Product
 {% block content %}
 <form class="container container-my" style="color:white;" method="POST">
         <header class="heading">Update User Information</header><hr></hr>
-            {{form.as_p}}
+            {{form.as_table}}
             {% csrf_token %}
         <center> <button id="submit" type="submit" class="btn btn-primary">Update</button></center>
 </form>

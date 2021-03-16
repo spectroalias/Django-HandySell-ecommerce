@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'product/product_detail.css' %}"/>
 {% endblock %}
@@ -20,7 +20,7 @@ Product Details
         <h2 class="title mb-3">{{product.title}}</h2> 
         <h4 class="title mb-2">seller: <b>{{product.seller}}</b></h4>
         {% if user.is_authenticated %}
-    <a href="{% url 'product_update' pk=product.pk %}" class="glyphicon glyphicon-edit">edit</a>
+    <a href="{% url 'product:product_update' pk=product.pk %}" class="glyphicon glyphicon-edit">edit</a>
     {% endif %}
     <br><br>
     <p class="price-detail-wrap"> 
@@ -56,23 +56,25 @@ Product Details
                 </dl>  <!-- item-property .// -->
             </div> <!-- col.// --> {% endcomment %}
         <hr>
-        {% include 'cart/cart_update.html' with product=product cart=cart %}
+        {% include 'cart/cart_update.html' with product=product cart=cart next=request.path %}
         {% if user.is_authenticated %}
         <hr>
-        <a href="{% url 'add_comment' pk=product.pk %}" class="btn btn-lg btn-outline-primary text-uppercase"> <i class="fas fa-shopping-cart"></i> Add comment</a>
         <hr><hr><hr><hr>
-        {% comment %} <a href="{% url 'product_delete' pk=product.pk %}" class="btn btn-lg btn-danger text-uppercase"> <i class="fas fa-shopping-cart"></i> Delete</a> {% endcomment %}
+        {% comment %} <a href="{% url 'product:product_delete' pk=product.pk %}" class="btn btn-lg btn-danger text-uppercase"> <i class="fas fa-shopping-cart"></i> Delete</a> 
+        <a href="{% url 'add_comment' pk=product.pk %}" class="btn btn-lg btn-outline-primary text-uppercase"> <i class="fas fa-shopping-cart"></i> Add comment</a>
+        
+        {% endcomment %}
         {% endif %}
     </article> <!-- card-body.// -->
             </aside> <!-- col.// -->
         </div> <!-- row.// -->
         <div class="container" style="color:black;"> <!-- card.// -->
-            {% for comment in product.comments.all %}
+            <!-- {% for comment in product.comments.all %}
             <div class="container">
                <a href="{% url 'comment_detail' pk=comment.pk  %}"> <hr><h4>{{comment.text}}</h4></a>
-                <p style="color:;">by: {{comment.author}} on {{comment.created_date}}</p>
+                <p >by: {{comment.author}} on {{comment.created_date}}</p>
             </div>
-            {% endfor %}
+            {% endfor %} -->
             </div>
     </div> 
 </div>

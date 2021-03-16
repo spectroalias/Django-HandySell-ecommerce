@@ -1,13 +1,5 @@
-from .models import Comment,Product
+from .models import Product
 from django import forms
-
-class CommentForm(forms.ModelForm):
-    class Meta:
-        model=Comment
-        fields=['text']
-        widget={
-            'text':forms.Textarea()
-        }
 
 class ProductForm(forms.ModelForm):
     class Meta:

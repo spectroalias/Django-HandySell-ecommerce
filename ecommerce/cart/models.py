@@ -31,7 +31,7 @@ class CartModel_Manager(models.Manager):
 
 
 class Cart(models.Model):
-    user        =models.ForeignKey(User,null=True,blank=True,on_delete=models.CASCADE)
+    user        =models.ForeignKey(User,null=True,blank=True,on_delete= models.SET_NULL)
     products    =models.ManyToManyField(Product,blank=True)
     total       =models.DecimalField(default=0.0,max_digits=7, decimal_places=2)
     sub_total   =models.DecimalField(default=0.0,max_digits=7, decimal_places=2)

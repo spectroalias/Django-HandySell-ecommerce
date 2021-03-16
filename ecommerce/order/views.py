@@ -3,28 +3,49 @@ from cart.models import Cart
 from cart.views import cart_home
 from .models import Order
 from accounts.forms import UserLoginForm,GuestForm
+from addresses.forms import AddressForm
+from addresses.models import Address
 from billprofile.models import BillingProfile
 from accounts.models import GuestUser
+from addresses.models import Address
 # Create your views here.
 
 def order_checkout(request):
     cart_obj,new=Cart.objects.new_or_get(request)
-    obj=None
     if new or cart_obj.products.count()==0:
         return redirect('cart:home')
-    else:
-        obj,new_order=Order.objects.get_or_create(cart=cart_obj,billing_profle=None)
-    user=request.user
     login_form=UserLoginForm()
     guest_user_form=GuestForm()
-    gemail=request.session.get('guest_email_id')
-    bill_profile=None
-    if user.is_authenticated:
-        bill_profile,new_bill=BillingProfile.objects.get_or_create(user=user,email=user.email)
-    elif gemail is not None:
-        bill_profile,new_guest_bill=BillingProfile.objects.get_or_create(email=gemail)
-        guest=GuestUser.objects.get(id=gemail)
-    else:
-        pass
+    ship_add_form=AddressForm()
+    bill_add_form=AddressForm()
     
-    return render(request,'order/checkout.html',{'order':obj,'bill_profile':bill_profile,'form':login_form,'guest_form':guest_user_form})
+    billing_address_id = request.session.get("billing_address_id", None)
+    shipping_address_id = request.session.get("shipping_address_id", None)
+    bill_profile,created = BillingProfile.objects.new_or_get(request)
+    order_obj = None
+
+    if bill_profile is not None:
+        # if there are other objects then make them inactive for now,
+        if request.user.is_authenticated:
+            address_qs = Address.objects.filter(billing_profle=bill_profile)
+        order_qs = Order.objects.filter(billing_profle=bill_profile, cart=cart_obj,active=True,status="created")
+        if order_qs.count()>=1:
+            order_obj=order_qs.first()
+        else:
+            order_obj= Order.objects.create(cart=cart_obj,billing_profle=bill_profile)
+        if billing_address_id:
+            order_obj.bill_add=Address.objects.get(id=billing_address_id)
+            del request.session["billing_address_id"]
+        if shipping_address_id:
+            order_obj.ship_add=Address.objects.get(id=shipping_address_id)
+            del request.session["shipping_address_id"]
+        if billing_address_id or shipping_address_id:
+            order_obj.save()
+    if request.method == 'POST':
+        isvalid = order_obj.final_check()
+        if isvalid:
+            order_obj.status_paid()
+            del request.session["cart_id"]
+            return render(request,"order/success.html",{})
+
+    return render(request,'order/checkout.html',{'ship_add':ship_add_form,'bill_add':bill_add_form,'order':order_obj,'bill_profile':bill_profile,'form':login_form,'guest_form':guest_user_form})

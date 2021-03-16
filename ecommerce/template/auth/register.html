@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'initials/register.css' %}"/>
 {% endblock %}
@@ -9,11 +9,11 @@ Register now
 {% block content %}
 <form class="container container-my" method="POST">
         <header class="heading"> Register Now</header><hr></hr>
-            {{form.as_p}}
+            {{form.as_table}}
             {% csrf_token %}
         <center> <button id="submit" type="submit" class="btn btn-success">Register</button></center>
         {% if user.is_anonymous %}
-        <br><center><a href="{% url 'login' %}" style="color:yellow;" role="button">- Having an account -</a></center>
+        <br><center><a href="{% url 'accounts:login' %}" style="color:yellow;" role="button">- Having an account -</a></center>
         {% endif %}
 </form>
 {% endblock %}

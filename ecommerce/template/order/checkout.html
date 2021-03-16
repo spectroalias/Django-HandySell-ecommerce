@@ -1,40 +1,85 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'product/product_detail.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'product/product_detail.css' %}" />
 {% endblock %}
 {% block title %}
 Complete your checkout
 {% endblock %}
 {% block content %}
 <br><br><br><br><br>
-    
-    <div class='container jumbotron text-center'>
+
+<div class='container-fluid jumbotron text-center'>
     {% if not bill_profile %}
-        <div class='text-center container'>
-            <div class='col-12 col-md-6'><strong>Login</strong>
+    <div class='text-center container'>
+        <div class='col-12 col-md-6'><strong>Login</strong>
             {% include 'order/snippets/login_form.html' with form=form next_url=request.build_absolute_uri %}
+        </div>
+        <div class='col-12 col-md-6'><a><strong>Continue as Guest</strong></a>
+            {% url 'account:guest_login' as guest_reg %}
+            {% include 'order/snippets/guest_login.html' with form=guest_form next_url=request.build_absolute_uri action_url=guest_reg %}
+        </div>
+    </div>
+    {% else %}
+    <h1 style='text-align:center'>Checkout</h1>
+    <div style="width: 100%; height:310px">
+        <div style="width: 50%; height: 100%; float: left;"> 
+            
+                <p class="lead">Order Details</p>
+                    <table style="width:100%;align-items: left;text-align: left;">
+                            <tr>
+                            <td>
+                                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;" ><h4 >Order id : </h4></div>
+                            </td>
+                            <td>
+                                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;" ><h4> {{order.order_id}}</h4></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;" ><h4>Shipping Total :</h4></div>
+                            </td>
+                            <td>
+                                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;" ><h4> {{order.shipping_total}}</h4></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;" ><h4>Order amount to pay : </h4></div>
+                            </td>
+                            <td>
+                                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;" ><h4><h4> {{order.cart.total}}</h4></h4></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;" ><h4><h4>Total amount to pay : </h4></h4></div>
+                            </td>
+                            <td>
+                                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;" ><h4><h4><h4> {{order.total}}</h4></h4></h4></div>
+                            </td>
+                        </tr>
+                </table>
             </div>
-            <div class='col-12 col-md-6'><a><strong>Continue as Guest</strong></a>
-            {% url 'guest_login' as guest_reg %}
-            {% include 'order/snippets/guest_login.html' with form=guest_form next_url=request.build_absolute_uri action_url=guest_reg %}            
+            <div style="margin-left: 50%; height: 100%;"> 
+                  
+                        {% if not order.ship_add %}
+                                <p>Shipping Address</p>
+                                {% url "address:checkout_address_create" as checkout_address_create %}
+                                {% include 'addresses/addresses_form.html' with form=ship_add next_url=request.build_absolute_uri action_url=checkout_address_create address_type='shipping' %}
+
+                        {% elif not order.bill_add %}
+                                <p>Billing Address</p>
+                                {% url 'address:checkout_address_create' as checkout_address_create %}
+                                {% include 'addresses/addresses_form.html' with form=bill_add next_url=request.build_absolute_uri action_url=checkout_address_create address_type='billing' %}
+                        {% else %}
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <button type="submit">Final Checkout</button>
+                        </form>
+                        {% endif %}
             </div>
         </div>
-    {% else %}
-        <h1 style='text-align:center'>Checkout</h1><table class='text-center container'>
-        <tr>
-            <td><h3>Order id :</h3></td>
-            <td><h3>{{order.order_id}}</h3></td>
-        </tr>
-        <tr>
-            <td><h3>Shipping Total :</h3></td>
-            <td><h3>{{order.shipping_total}}</h3></td>
-        </tr>
-        <tr>
-            <td><h3>Total amount to pay :</h3></td>
-            <td><h3>{{order.total}}</h3></td>
-        </tr>
-        </table>
     {% endif %}
     </div>
 {% endblock %}

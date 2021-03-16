@@ -4,6 +4,7 @@ app_name='order'
 
 urlpatterns = [
     path("checkout",order_checkout,name="checkout"),
+    path("success",order_checkout,name="success"),
 
 
 ]

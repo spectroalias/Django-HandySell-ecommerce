@@ -1,0 +1,23 @@
+<form class="container" method="POST" action='{% if action_url %} {{ action_url }}{% else %}{% url 'account:login' %}{% endif %}'>{% csrf_token %}
+    {% if address_type %}<input type='hidden' name='address_type' value='{{ address_type }}'/>{% endif %}   
+    <table>
+        <tr>
+            <td>
+                <center>
+                    {{ form.as_table }}
+                 </center>
+            </td>
+        </tr>
+        <tr>
+            <td><br></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="same_bill_add" {% if address_type == 'billing' %}disabled{% endif %}> Use the same address as billing address.</input>
+            </td>
+            <td>
+           <center> <button id="submit" type="submit" style="width: 80%;" class="btn btn-outline-primary btn-form btn-success">Proceed</button></center>
+            </td>            
+        </tr>
+</table> 
+</form>
