@@ -37,7 +37,7 @@ class ProductDetailView(DetailView):
 
 class DeleteProductView(DeleteView,LoginRequiredMixin):
     model = Product
-    success_url=reverse_lazy('home')
+    success_url=reverse_lazy('product:home')
 
 # class CreateProductView(LoginRequiredMixin,CreateView):
 #     model=Product
@@ -61,7 +61,7 @@ def add_product(request):
             product=form.save(commit=False)
             product.seller=get_user(request)
             product=form.save()
-            return redirect('home')
+            return redirect('product:home')
         else:
             form=ProductForm()
     return render(request,'Product/product_form.html',{'form':form})
