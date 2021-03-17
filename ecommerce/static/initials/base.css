@@ -1,7 +1,7 @@
   .footer #button{
     width:35px;
     height:35px;
-    border: #a7570d 12px solid;
+    border: #0d69a783 12px solid;
     border-radius:35px;
     margin:0 auto;
     position:relative;
@@ -85,6 +85,13 @@
   .navbar {
     min-height:28px !important;
   }
+  .dropdown-menu{
+    color: wheat;
+    background-color: rgba(55, 59, 71, 0.857);
+  }
+  .dropdown-menu > a:hover, .dropdown-menu > a:focus {
+    background-color:rgb(0, 166, 255);
+}
   body{
     background-color: #2c2c2cf1;
     background-blend-mode: overlay;

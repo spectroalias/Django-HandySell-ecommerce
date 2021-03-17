@@ -14,10 +14,9 @@ Handysell
 {% block content %}
   <div class="container mt-5 pt-5">
     {% if request.GET.q %}
-    <strong style="color:white">searched for {{request.GET.q}}</strong>
+      <h2 style="color: aliceblue;">Here are the search result for "{{request.GET.q}}" :</h2>
     {% endif %}
-    {% include 'search/search_form.html' %}
-  <br>
+    <br>
   <br>
   <br>
     {% for item in object_list %}
