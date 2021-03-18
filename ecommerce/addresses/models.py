@@ -13,7 +13,7 @@ class Address(models.Model):
     add_line_1      = models.CharField(max_length=120)
     add_line_2      = models.CharField(max_length=120)
     city            = models.CharField(max_length=120)
-    pincode         = models.PositiveIntegerField(max_length=120)
+    pincode         = models.PositiveIntegerField()
     country         = models.CharField(max_length=120,choices=getcountry_choices())
 
     def __str__(self):
