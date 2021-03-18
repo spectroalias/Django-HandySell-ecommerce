@@ -1,7 +1,13 @@
 # HandySell-ecommerce
+
 it is created on the virtual environment 
 to activate
-on linux: "source bin/activate"
+on linux: "source newdjangoenv/bin/activate"
 for windows : "./activate"
 then run the Django project.
-it has some bugs...
+
+### The Screen shots are as follows:
+
+![Home Page](screenshots/page1.png)
+
+more to come...
