@@ -28,6 +28,7 @@ font-size: 25px;
 color:white;
 bottom: 15%;
 text-decoration-style: double;
+text-shadow: 0 2px 3px rgb(0, 0, 0);
 }
 h1{
 text-emphasis:inherit;
@@ -66,7 +67,6 @@ text-emphasis:inherit;
     top:-100%;
     right:0;
     background:rgba(66, 139, 202, 0.75);
-    width:100%;
     height:100%;
     padding:2%;
     text-align:center;
