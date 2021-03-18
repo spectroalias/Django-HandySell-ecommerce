@@ -1,10 +1,7 @@
-.container-my{
-    font-family:Roboto,sans-serif;
-    background-image:url(https://images.pexels.com/photos/1087727/pexels-photo-1087727.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940) ;
-     border-style: 1px solid grey;
+.container-m{
+     font-family:Roboto,sans-serif;
+     background-image:url(https://images.pexels.com/photos/1087727/pexels-photo-1087727.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940) ;
      margin: 0 auto;
-     text-align: center;
-     box-shadow: 2px 5px 5px 0px black;
      max-width: 1000px;
      padding-top: 10px;
      height: 500px;
@@ -26,7 +23,7 @@
      color:#F96;
      padding-top:10px;
 }
-}
+
 .mail{
      margin-left: 44px;
      font-family: sans-serif;

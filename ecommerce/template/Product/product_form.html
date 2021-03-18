@@ -7,10 +7,25 @@
 Add Product
 {% endblock %}
 {% block content %}
-<form class="container container-my" style="color:white" method="POST">
-        <header class="heading">Add Product Information</header><hr></hr>
-            {{form.as_table}}
-            {% csrf_token %}
-        <center> <button id="submit" type="submit" class="btn btn-success">Add</button></center>
+<form class="container container-m" method="POST">
+    {% csrf_token %}
+    <header class="heading">Add Product Information</header><hr></hr>
+        <table align="center">
+            <tr>
+                <td>
+                    <center>
+                        {{ form.as_table }}
+                     </center>
+                </td>
+            </tr>
+            <tr>
+                <td><br></td>
+            </tr>
+            <tr>
+                <td>
+                </td>            
+            </tr>
+    </table> 
+    <center> <button id="submit" type="submit" style="width: 50%;" class="btn btn-success "><span class="glyphicon glyphicon-plus"></span> Post Product</button></center>
 </form>
 {% endblock %}

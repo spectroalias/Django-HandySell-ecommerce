@@ -44,12 +44,14 @@ class DeleteProductView(DeleteView,LoginRequiredMixin):
 #     fields=('title','description','price','image')
 #     redirect_field_name ='Product/Product_list.html'
 
-class UpdateProductView(LoginRequiredMixin,UpdateView):
-    model = Product
-    fields=['title','description','image','price']
-    template_name='Product/product_update.html'
-    redirect_field_name='Product/product_detail.html'
-
+@login_required
+def UpdateProductView(request,pk):
+    product_obj= Product.objects.get(pk=pk)
+    form = ProductForm(request.POST or None,instance=product_obj)
+    if request.method == 'POST' and form.is_valid(): 
+        form.save() 
+        return redirect('product:product_detail',pk=pk) 
+    return render(request,'Product/product_update.html',{'form':form})
 
 # working just fine...
 @login_required
@@ -65,3 +67,9 @@ def add_product(request):
         else:
             form=ProductForm()
     return render(request,'Product/product_form.html',{'form':form})
+
+@login_required
+def myProductsListView(request):
+    qs=Product.objects.filter(seller=request.user)
+    return render(request,'Product/my_product_list.html',{'my_products':qs})
+    

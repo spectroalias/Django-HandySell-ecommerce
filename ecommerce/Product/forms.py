@@ -6,9 +6,14 @@ class ProductForm(forms.ModelForm):
         model=Product
         fields=['title','description','price','image']
         widget={
+            'title':forms.TextInput(),
             'description':forms.Textarea(),
             'price':forms.IntegerField(),
-            'title':forms.TextInput(),
             'image':forms.URLField()
-
         }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['description'].widget.attrs['style']="color:black;"
+        self.fields['price'].widget.attrs['style']="color:black;width:100%"
+        self.fields['title'].widget.attrs['style']="color:black;width:100%"
+        self.fields['image'].widget.attrs['style']="color:black;width:100%"

@@ -42,6 +42,7 @@
               <a class="dropdown-toggle dropdown nav-item nav-link glyphicon glyphicon-user " href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">{{user.username}}</a>
               <div class="dropdown-menu nav-item nav-link" aria-labelledby="navbarDropdownMenuLink">  
                 <a class="dropdown-item glyphicon glyphicon-pencil nav-item nav-link" href="{% url 'accounts:user_detail' pk=user.pk %}"> My Profile</a>
+                <a class="dropdown-item glyphicon glyphicon-tasks nav-item nav-link" href="{% url 'product:my_products' %}"> My Products</a>
                 <a class="dropdown-item nav-item nav-link glyphicon glyphicon-log-out" href="{% url 'accounts:logout' %}"> Logout</a>
               </div>
             </div>
