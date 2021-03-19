@@ -12,7 +12,7 @@ from .models import Product
 
 class ProductListView(ListView):
     model = Product
-    qs=Product.objects.all()
+    ordering = ['-arrival_date']
     template_name = "Product/Product_list.html"
     
     def get_context_data(self, **kwargs):
@@ -70,6 +70,6 @@ def add_product(request):
 
 @login_required
 def myProductsListView(request):
-    qs=Product.objects.filter(seller=request.user)
+    qs=Product.objects.filter(seller=request.user).order_by("-arrival_date")
     return render(request,'Product/my_product_list.html',{'my_products':qs})
     
