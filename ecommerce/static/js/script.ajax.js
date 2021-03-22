@@ -21,6 +21,8 @@
 					buttonType.html("<button type='submit' class='btn btn-primary glyphicon glyphicon-cart'>Add to cart</button>")
 				}
 				$("#cartIcon").text(data.cart_count)
+				$(".subTotal").text(data.cart_total)
+				$(".Total").text(data.total_amount)
 			},
 			error: function(errorData){
 				$.confirm({

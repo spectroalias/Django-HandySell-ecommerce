@@ -56,8 +56,24 @@ My Cart
             {% endfor %}
         </div>
         <div class='container'>
-            <h4 style="float: left;"><strong>Your cart items amount to (in INR):</strong> {{cart.sub_total}}</h4>
-            <h4 style="float: right;"><strong>Amount to pay include tax (in INR):</strong> {{cart.total}}</h4>
+            <table>
+                <tr>
+                    <td>
+                        <h4 style="float: left;"><strong>Your cart items amount to (in INR):</strong></h4>
+                    </td>
+                    <td>
+                        <h5 style="color: green;float:right;" class="subTotal">{{cart.sub_total}}</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4 style="float: left;"><strong>Amount to pay include tax (in INR):</strong></h4>
+                    </td>
+                    <td>
+                        <h3 style="color: green;float: right;" class="Total" >{{cart.total}}</h3>
+                    </td>
+                </tr>
+            </table>
             <a class="btn btn-success" style="width: 100%;" href="{% url 'order:checkout' %}">Checkout</a>
         </div>
     </div>
