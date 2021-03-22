@@ -1,0 +1,101 @@
+@import 'https://fonts.googleapis.com/css?family=Montserrat';
+
+body{
+    background-image:url("http://www.idea-venue.com/wp-content/tutsource/denim/Denim%20texture.png");
+    background-size:auto;
+
+ }
+/* 
+.thumbnail{
+position: relative;
+text-align: center;
+color: white;
+ }
+.thumbnail:hover {
+-ms-transform: scale(1.1);
+-webkit-transform: scale(1.1);
+transform: scale(1.12);
+} */
+
+.centered {
+font-family: Mogra;
+font-size: 25px;
+
+}
+
+.carousel-caption{
+  font-family: 'Pacifico';
+color:white;
+bottom: 15%;
+text-decoration-style: double;
+text-shadow: 0 2px 3px rgb(0, 0, 0);
+}
+h1{
+text-emphasis:inherit;
+}
+
+.carousel-head {
+  position: absolute;
+  top: 8%;
+  left: 80%;
+  bottom: 80%;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,.6);
+}
+.carousel-mid {
+  font-family: 'Pacifico', cursive;
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  bottom: 50%;
+  transform: translateY(-50%);
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,.6);
+  box-shadow: 5px 10px #888888;
+  -webkit-text-stroke: 1px white;
+
+}
+
+.thumbnail {
+    position:relative;
+    overflow:hidden;
+}
+ 
+.caption {
+    position:absolute;
+    top:-100%;
+    right:0;
+    background:rgba(66, 139, 202, 0.75);
+    height:100%;
+    padding:2%;
+    text-align:center;
+    color:#fff !important;
+    z-index:2;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+.thumbnail:hover .caption {
+    top:0%;
+}
+
+.double {border-style: double;
+border-color: white;
+}
+.parallax {
+    /* The image used */
+    background-image: url("https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&h=650&w=940");
+
+    /* Set a specific height */
+    height:150px;
+    width:100%;
+    color:white;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
