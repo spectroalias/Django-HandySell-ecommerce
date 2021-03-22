@@ -1,0 +1,32 @@
+<nav class="navbar-expand-sm navbar sticky-top navbar navbar-dark bg-dark navbar-fixed-top navbar-inner-sm fancyfonts" role="banner">
+  <a class="navbar-brand" href="{% url 'product:home' %}"><span class="glyphicon glyphicon-home"></span> HandySell</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" style="float: right;">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <div class="navbar-nav nav navbar-left" >
+          <a href="{% url 'accounts:contact_us' %}"class="nav-item nav-link" style="margin:0%;"><span class="glyphicon glyphicon-earphone"></span></a></li>
+        </div>
+        <!-- <ul class="navbar-nav nav navbar-left"></ul> -->
+          <!-- <ul class="navbar-center navbar-nav nav small"></ul> -->
+          <!-- <ul class="nav navbar-nav navbar-right"> -->
+          <div class="navbar-nav" style="float: right;">
+            {% if user.is_authenticated %}
+            <div class="dropdown">
+              <a class="dropdown-toggle dropdown nav-item nav-link glyphicon glyphicon-user " href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">{{user.username}}</a>
+              <div class="dropdown-menu nav-item nav-link" aria-labelledby="navbarDropdownMenuLink">  
+                <a class="dropdown-item glyphicon glyphicon-pencil nav-item nav-link" href="{% url 'accounts:user_detail' pk=user.pk %}"> My Profile</a>
+                <a class="dropdown-item glyphicon glyphicon-tasks nav-item nav-link" href="{% url 'product:my_products' %}"> My Products</a>
+                <a class="dropdown-item nav-item nav-link glyphicon glyphicon-log-out" href="{% url 'accounts:logout' %}"> Logout</a>
+              </div>
+            </div>
+          {% else %}
+          <a href="{% url 'accounts:register' %}" class="nav-item nav-link"><span class="glyphicon glyphicon-user"></span> Register </a></li>
+          <a href="{% url 'accounts:login' %}" class="nav-item nav-link"><span class="glyphicon glyphicon-log-in"></span> Login </a></li>
+          {% endif %}
+          <a href="{% url 'accounts:about_us' %}" class="nav-item nav-link" ><span class="glyphicon glyphicon-info-sign"></span> AboutUs </a></li>
+          {% include 'search/search_form.html' %}
+          <a class="glyphicon glyphicon-shopping-cart nav-item nav-link" href="{% url 'cart:home' %}"><span id="cartIcon" class='badge badge-pill badge-info'> {{ request.session.cart_items }} </span></a></li>
+        </div>  
+      </div>
+</nav>

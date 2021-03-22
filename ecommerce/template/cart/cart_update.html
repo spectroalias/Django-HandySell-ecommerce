@@ -1,12 +1,14 @@
-<form method='POST' action="{% url 'cart:update' %}" class="form"> {% csrf_token %}
+<form method='POST' action="{% url 'cart:update' %}" class="form form-cart-update"> {% csrf_token %}
     <input type='hidden' name='product_id' value='{{product.id}}'/>
-    <input type='hidden' name='next' value={{ next }}/>
-    <input type='hidden' name='q' value={{ request.GET.q }}/>
-    {% if product in cart.products.all %}
-        <button type='submit' class="btn btn-primary glyphicon glyphicon-cart">Remove from cart</button>
-    {% else %}
-        <button type='submit' class="btn btn-primary glyphicon glyphicon-cart">Add to cart</button>
-    {% endif %}
-        
+    <input type='hidden' name='next' value='{{ next }}'/>
+    <input type='hidden' name='q' value='{{ request.GET.q }}'/>
+    <div class="cartUpdate">
+        {% if product in cart.products.all %}
+        <button type='submit' class='btn btn-primary glyphicon glyphicon-cart'>Remove from cart</button>
+        {% else %}
+        <button type='submit' class='btn btn-primary glyphicon glyphicon-cart'>Add to cart</button>
+        {% endif %}
+    </div>
+
 </form>
 {% comment %}action="{% url 'search:{{request.GET.q}}' %}" {% endcomment %}
