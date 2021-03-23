@@ -37,3 +37,30 @@ def checkout_address_create(request):
         else:
             return redirect('order:checkout')
     return redirect('order:checkout')
+
+
+def checkout_address_reuse(request):
+    form=AddressForm(request.POST or None)
+    next_=request.GET.get('next')
+    next_post=request.POST.get('next')
+    redirect_urls=next_ or next_post or None
+    if request.method == 'POST':
+        address_id = request.POST.get("address_id")
+        billing_profle, iscreated = BillingProfile.objects.new_or_get(request)
+        if billing_profle is not None:
+            address_type = request.POST.get('address_type','shipping')
+            add_obj = Address.objects.filter(id=address_id,billing_profle=billing_profle)
+            if add_obj.count()>0 :
+                add_obj=add_obj.first()
+                add_obj.pk=None
+                add_obj.address_type = address_type
+                add_obj.save()
+                request.session[address_type+"_address_id"] = add_obj.id
+            else :
+                print("Something went wrong...on address side.")
+            return redirect('order:checkout')
+        if is_safe_url(redirect_urls,request.get_host()):
+            return redirect(redirect_urls)
+        else:
+            return redirect('order:checkout')
+    return redirect('order:checkout')

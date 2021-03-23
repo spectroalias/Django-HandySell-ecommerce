@@ -22,7 +22,7 @@ Complete your checkout
     </div>
     {% else %}
     <h1 style='text-align:center'>Checkout</h1>
-    <div style="width: 100%; height:310px">
+    <div style="width: 100%; height:350px">
         <div style="width: 50%; height: 100%; float: left;"> 
             
                 <p class="lead">Order Details</p>
@@ -62,14 +62,16 @@ Complete your checkout
                 </table>
             </div>
             <div style="margin-left: 50%; height: 100%;"> 
-                  
-                        {% if not order.ship_add %}
+                       {% if not order.ship_add %}
                                 <p>Shipping Address</p>
+                                {% url "address:checkout_address_reuse" as checkout_address_reuse %}
+                                {% include 'addresses/address_reuse.html' with next_url=request.build_absolute_uri action_url=checkout_address_reuse address_qs=address_qs address_type='shipping' %}
                                 {% url "address:checkout_address_create" as checkout_address_create %}
                                 {% include 'addresses/addresses_form.html' with form=ship_add next_url=request.build_absolute_uri action_url=checkout_address_create address_type='shipping' %}
-
                         {% elif not order.bill_add %}
                                 <p>Billing Address</p>
+                                {% url "address:checkout_address_reuse" as checkout_address_reuse %}
+                                {% include 'addresses/address_reuse.html' with next_url=request.build_absolute_uri action_url=checkout_address_reuse address_qs=address_qs address_type='billing'%}
                                 {% url 'address:checkout_address_create' as checkout_address_create %}
                                 {% include 'addresses/addresses_form.html' with form=bill_add next_url=request.build_absolute_uri action_url=checkout_address_create address_type='billing' %}
                         {% else %}
@@ -78,6 +80,8 @@ Complete your checkout
                             <button type="submit">Final Checkout</button>
                         </form>
                         {% endif %}
+            </div>
+            <div class="container" style="float: right;">
             </div>
         </div>
     {% endif %}

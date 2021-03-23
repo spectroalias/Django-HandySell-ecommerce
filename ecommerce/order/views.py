@@ -23,6 +23,7 @@ def order_checkout(request):
     shipping_address_id = request.session.get("shipping_address_id", None)
     bill_profile,created = BillingProfile.objects.new_or_get(request)
     order_obj = None
+    address_qs = Address.objects.filter(billing_profle=bill_profile)
 
     if bill_profile is not None:
         # if there are other objects then make them inactive for now,
@@ -46,6 +47,15 @@ def order_checkout(request):
         if isvalid:
             order_obj.status_paid()
             del request.session["cart_id"]
+            request.session["cart_items"] = 0
             return render(request,"order/success.html",{})
-
-    return render(request,'order/checkout.html',{'ship_add':ship_add_form,'bill_add':bill_add_form,'order':order_obj,'bill_profile':bill_profile,'form':login_form,'guest_form':guest_user_form})
+    responseData = {
+        'ship_add':ship_add_form,
+        'bill_add':bill_add_form,
+        'order':order_obj,
+        'bill_profile':bill_profile,
+        'form':login_form,
+        'guest_form':guest_user_form,
+        'address_qs':address_qs
+    }
+    return render(request,'order/checkout.html',responseData)
