@@ -33,5 +33,25 @@
 			},		
  		})
  	})
-
+	// auto search implementation.
+	var searchForm = $("#form-search")
+	var searchQuery = searchForm.find("[name='q']")
+	var typeInterval = 1000
+	var typeTimer;
+	searchForm.keyup(function(event){
+		clearTimeout(typeTimer)
+		typeTimer = setTimeout(performSearch,typeInterval)
+	})
+	function performSearch(){
+		visualSearching()
+		var q = searchQuery.val()
+		setTimeout(function(){
+			window.location.href='/search/?q='+q
+		},1500)
+	}
+	function visualSearching(event){
+		var searchButton = searchForm.find('.button-search-form')
+		searchButton.addClass("disabled")
+		searchButton.html("<i class='fas fa-stroopwafel fa-spin'></i>")
+	} 
 });

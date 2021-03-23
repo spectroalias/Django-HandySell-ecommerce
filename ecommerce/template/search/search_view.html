@@ -22,7 +22,7 @@ Handysell
     {% for item in object_list %}
     <div class="col-sm-4">            
       <div class="thumbnail">
-          <div class="caption">
+          <div class="caption" style="width: 100%;">
               <h4 class="centered"; style="color:rgb(0,0,0);">{{item.title}}</h4>
               <div style="color:rgb(0,0,0);">Rs {{item.price}}/-</div>
               <form style="float: left;" action="{% url 'product:product_detail' pk=item.pk %}">
@@ -32,7 +32,7 @@ Handysell
                 {% include 'cart/cart_update.html' with product=item cart=cart next=request.path q=request.GET.q %}
                 </div>
             </div>
-              <img src={{item.image}} alt="Lights" class="img-fluid" style="width:100%; height:300px; ">
+              <img src={{item.image}} alt="Lights" class="img-fluid" style="width:100%; height:400px; ">
         </div>
       </div>
     {% endfor %}

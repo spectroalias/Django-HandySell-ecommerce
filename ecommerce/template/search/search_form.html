@@ -1,5 +1,5 @@
-<form method='GET' action="{% url 'search:query' %}" class="form-inline ml-auto " >
+<form method='GET' action="{% url 'search:query' %}" class="form-inline ml-auto" id="form-search">
   <input class="form-control mr-sm" type="text" value='{{request.GET.q}}' name='q' placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-light" style="border: 1px solid gray;" type="submit"><i class="glyphicon glyphicon-search" ></i></button>
+  <button class="button-search-form btn btn-outline-light" style="border: 1px solid gray;" type="submit"><i class="glyphicon glyphicon-search" ></i></button>
 </form>
 {% comment %}action="{% url 'search:{{request.GET.q}}' %}" {% endcomment %}
