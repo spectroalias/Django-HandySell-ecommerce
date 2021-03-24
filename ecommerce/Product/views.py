@@ -33,7 +33,7 @@ class ProductDetailView(DetailView):
         return context
     
     def get_object(self):
-        return get_object_or_404(Product,pk=self.kwargs.get('pk'))
+        return get_object_or_404(Product,slug=self.kwargs.get('slug'))
 
 class DeleteProductView(DeleteView,LoginRequiredMixin):
     model = Product
@@ -45,12 +45,12 @@ class DeleteProductView(DeleteView,LoginRequiredMixin):
 #     redirect_field_name ='Product/Product_list.html'
 
 @login_required
-def UpdateProductView(request,pk):
-    product_obj= Product.objects.get(pk=pk)
+def UpdateProductView(request,slug):
+    product_obj= Product.objects.get(slug=slug)
     form = ProductForm(request.POST or None,instance=product_obj)
     if request.method == 'POST' and form.is_valid(): 
         form.save() 
-        return redirect('product:product_detail',pk=pk) 
+        return redirect('product:product_detail',slug=slug) 
     return render(request,'Product/product_update.html',{'form':form})
 
 # working just fine...

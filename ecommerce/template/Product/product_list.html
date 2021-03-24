@@ -66,7 +66,7 @@ HandySell
               <h3 class="centered" style="color:rgb(255, 255, 255);">{{item.title}}</h3>
               <h4 style="color:rgb(0, 0, 0);">Rs {{item.price}}/-</h4>
               <!-- <p class="centered"; style="color:rgb(0,0,0);font-size:15px;">comments: {{item.comments.count}}</p> -->
-              <form style="float: left;" action="{% url 'product:product_detail' pk=item.pk %}">
+              <form style="float: left;" action="{% url 'product:product_detail' slug=item.slug %}">
               <button type="submit" class="btn btn-danger">Details</button>
               </form>
               <div style="float: right;">

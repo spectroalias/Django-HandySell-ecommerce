@@ -56,10 +56,10 @@ My Products
                         </tr>
                         <tr>
                             <td>
-                                <a href="{% url 'product:product_update' pk=item.pk %}" class="btn btn-success "><span class="glyphicon glyphicon-pencil"></span> Edit </a>
+                                <a href="{% url 'product:product_update' slug=item.slug %}" class="btn btn-success "><span class="glyphicon glyphicon-pencil"></span> Edit </a>
                             </td>
                             <td>
-                                <a href="{% url 'product:product_delete' pk=item.pk %}" class="btn btn-danger "><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                                <a href="{% url 'product:product_delete' slug=item.slug %}" class="btn btn-danger "><span class="glyphicon glyphicon-trash"></span> Delete</a>
                             </td>
                         </tr>
                     </table>

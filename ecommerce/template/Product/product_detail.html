@@ -20,7 +20,7 @@ Product Details
         <h2 class="title mb-3">{{product.title}}</h2> 
         <h4 class="title mb-2">seller: <b>{{product.seller}}</b></h4>
         {% if user.is_authenticated and user == product.seller %}
-            <a href="{% url 'product:product_update' pk=product.pk %}" class="glyphicon glyphicon-edit">edit</a>
+            <a href="{% url 'product:product_update' slug=product.slug %}" class="glyphicon glyphicon-edit">edit</a>
         {% endif %}
     <br><br>
     <p class="price-detail-wrap"> 
@@ -60,7 +60,7 @@ Product Details
         {% if user.is_authenticated %}
         <hr>
         <hr><hr><hr><hr>
-        {% comment %} <a href="{% url 'product:product_delete' pk=product.pk %}" class="btn btn-lg btn-danger text-uppercase"> <i class="fas fa-shopping-cart"></i> Delete</a> 
+        {% comment %} <a href="{% url 'product:product_delete' slug=product.slug %}" class="btn btn-lg btn-danger text-uppercase"> <i class="fas fa-shopping-cart"></i> Delete</a> 
         <a href="{% url 'add_comment' pk=product.pk %}" class="btn btn-lg btn-outline-primary text-uppercase"> <i class="fas fa-shopping-cart"></i> Add comment</a>
         
         {% endcomment %}
