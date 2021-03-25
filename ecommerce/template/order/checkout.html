@@ -75,9 +75,9 @@ Complete your checkout
                                 {% url 'address:checkout_address_create' as checkout_address_create %}
                                 {% include 'addresses/addresses_form.html' with form=bill_add next_url=request.build_absolute_uri action_url=checkout_address_create address_type='billing' %}
                         {% else %}
-                        <form method="POST" action="">
+                        <form method="POST" style="padding-top: 25%;">
                             {% csrf_token %}
-                            <button type="submit">Final Checkout</button>
+                            <button type="submit" class="btn btn-primary" style="width: 50%;">Final Checkout</button>
                         </form>
                         {% endif %}
             </div>

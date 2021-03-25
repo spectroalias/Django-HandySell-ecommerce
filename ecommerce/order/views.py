@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from cart.models import Cart
 from cart.views import cart_home
 from .models import Order
@@ -8,7 +9,36 @@ from addresses.models import Address
 from billprofile.models import BillingProfile
 from accounts.models import GuestUser
 from addresses.models import Address
+from django.http import HttpResponse
+from django.views.generic import View
+from .utils import render_to_pdf
+from django.template.loader import get_template
+
 # Create your views here.
+
+class GeneratePdf(View,LoginRequiredMixin):
+    def get(self, request, *args, **kwargs):
+        template = get_template('order/success.html')
+        order_id = self.kwargs.get('order_id')
+        order_obj= Order.objects.get(order_id=order_id)
+        if order_obj is not None:
+            if order_obj.billing_profle.user == request.user:
+                context = {
+                    "order": order_obj,
+                }
+                html = template.render(context)
+                pdf = render_to_pdf('order/success.html', context)
+                if pdf:
+                    response = HttpResponse(pdf, content_type='application/pdf')
+                    filename = "Invoice_%s.pdf" %(order_id)
+                    content = "inline; filename='%s'" %(filename)
+                    download = request.GET.get("download")
+                    if download:
+                        content = "attachment; filename='%s'" %(filename)
+                    response['Content-Disposition'] = content
+                    return response
+        return HttpResponse("Not found")
+
 
 def order_checkout(request):
     cart_obj,new=Cart.objects.new_or_get(request)
@@ -48,7 +78,7 @@ def order_checkout(request):
             order_obj.status_paid()
             del request.session["cart_id"]
             request.session["cart_items"] = 0
-            return render(request,"order/success.html",{})
+            return render(request,"order/success.html",{'order':order_obj})
     responseData = {
         'ship_add':ship_add_form,
         'bill_add':bill_add_form,

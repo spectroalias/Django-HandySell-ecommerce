@@ -7,9 +7,149 @@
 Complete your checkout
 {% endblock %}
 {% block content %}
-<br><br><br><br><br>
-    
-    <div class='container jumbotron text-center'>
-        <p>Successful payment is done.</p>
-    </div>
+<div class='container jumbotron text-center' style="margin-top: 10%;">
+    <p><span class="glyphicon glyphicon-ok-circle" style="color: green;"></span>Successful payment is done.</p>
+    <h2>Information Regarding Order: {{ order.order_id }}</h2>
+    <a class="btn btn-primary" href="{% url 'order:save_as_pdf' order_id=order.order_id %}" style="float: right;">Save as pdf</a>
+    <table style="padding:2px;width: 100%;border: 0.5px solid black; text-align: left;">
+        <tr>
+            <td>
+                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;">
+                    <h3>
+                        User ID:
+                    </h3>
+                </div>
+            </td>
+            <td>
+                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;">
+                    <h4>
+                        {{ order.billing_profle.user }} ({{ order.billing_profle.user.email }})                  </h4>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;">
+                    <h3>
+                        Shipping Address:
+                    </h3>
+                </div>
+            </td>
+            <td>
+                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;">
+                    <h4>
+                        {{ order.ship_add.add_line_1 }},{{ order.ship_add.add_line_2 }},{{ order.ship_add.city }},{{ order.ship_add.pincode }},{{ order.ship_add.country }}
+                    </h4>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;">
+                    <h3>
+                        Billing Address:
+                    </h3>
+                </div>
+            </td>
+            <td>
+                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;">
+                    <h4>
+                        {{ order.bill_add.add_line_1 }},{{ order.bill_add.add_line_2 }},{{ order.bill_add.city }},{{ order.bill_add.pincode }},{{ order.bill_add.country }}
+                    </h4>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;">
+                    <h3>
+                        Cart items: 
+                    </h3>
+                </div>
+            </td>
+            <td>
+                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;">
+                    <h4>
+                        <table style="margin:0px;">
+                            {% for item in order.cart.products.all %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'product:product_detail' slug=item.slug %}"> {{ item.title }} </a>
+                                </td>
+                                <td style="color: green;">
+                                    -> INR {{ item.price }}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </h4>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;">
+                    <h3>
+                        Shipping Total:
+                    </h3>
+                </div>
+            </td>
+            <td>
+                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;">
+                    <h4>
+                        {{ order.shipping_total }}
+                    </h4>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;">
+                    <h3>
+                        Total Payment:
+                    </h3>
+                </div>
+            </td>
+            <td>
+                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;">
+                    <h4>
+                        {{ order.total }}
+                    </h4>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;">
+                    <h3>
+                        STATUS:
+                    </h3>
+                </div>
+            </td>
+            <td>
+                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;">
+                    <h4>
+                        {{ order.status }}
+                    </h4>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;">
+                    <h3>
+                        Active:
+                    </h3>
+                </div>
+            </td>
+            <td>
+                <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;">
+                    <h4>
+                        {{ order.active }}
+                    </h4>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
 {% endblock %}
