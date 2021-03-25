@@ -54,4 +54,9 @@
 		searchButton.addClass("disabled")
 		searchButton.html("<i class='fas fa-stroopwafel fa-spin'></i>")
 	} 
+
+	$(".delete-product").on('submit', function() {
+		if(confirm("Really ? , you want to Delete this?")) return true;
+		else return false;
+	});
 });

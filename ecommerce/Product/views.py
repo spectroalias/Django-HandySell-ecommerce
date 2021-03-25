@@ -1,3 +1,4 @@
+from django.utils.http import is_safe_url 
 from django.shortcuts import render,get_object_or_404,redirect
 from django.views.generic import ListView ,DetailView,DeleteView ,CreateView ,UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -35,9 +36,21 @@ class ProductDetailView(DetailView):
     def get_object(self):
         return get_object_or_404(Product,slug=self.kwargs.get('slug'))
 
-class DeleteProductView(DeleteView,LoginRequiredMixin):
-    model = Product
-    success_url=reverse_lazy('product:home')
+# class DeleteProductView(DeleteView,LoginRequiredMixin):
+#     model = Product
+#     success_url=reverse_lazy('product:home')
+
+@login_required
+def deleteProduct(request,slug):
+    next_redirect = request.path
+    product_obj = Product.objects.get(seller=request.user,slug=slug)
+    if product_obj is not None and request.method == 'POST':
+        product_obj.delete()
+        if is_safe_url(next_redirect,request.get_host()):
+            return redirect(next_redirect)
+        else:
+            return redirect('product:home')
+    return render(request,'Product/product_confirm_delete.html',{})
 
 # class CreateProductView(LoginRequiredMixin,CreateView):
 #     model=Product
@@ -53,7 +66,6 @@ def UpdateProductView(request,slug):
         return redirect('product:product_detail',slug=slug) 
     return render(request,'Product/product_update.html',{'form':form})
 
-# working just fine...
 @login_required
 def add_product(request):
     form=ProductForm()
