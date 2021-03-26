@@ -10,8 +10,8 @@ Complete your checkout
 <div class='container jumbotron text-center' style="margin-top: 10%;">
     <p><span class="glyphicon glyphicon-ok-circle" style="color: green;"></span>Successful payment is done.</p>
     <h2>Information Regarding Order: {{ order.order_id }}</h2>
-    <a class="btn btn-primary" href="{% url 'order:save_as_pdf' order_id=order.order_id %}" style="float: right;">Save as pdf</a>
-    <table style="padding:2px;width: 100%;border: 0.5px solid black; text-align: left;">
+    <a class="btn btn-primary" href="{% url 'order:save_as_pdf' order_id=order.order_id %}" style="float: right;"><span class="glyphicon glyphicon-save-file"></span> Save as pdf</a>
+    <table style="padding:2px;width: 100%;text-align: left;">
         <tr>
             <td>
                 <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;">
@@ -128,7 +128,7 @@ Complete your checkout
             </td>
             <td>
                 <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;">
-                    <h4>
+                    <h4 style="color: green;">
                         {{ order.status }}
                     </h4>
                 </div>

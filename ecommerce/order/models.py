@@ -3,7 +3,10 @@ from django.db.models.signals import post_save,pre_save
 from .utils import order_id_generator
 from cart.models import Cart
 from addresses.models import Address
+from django.utils import timezone
 from billprofile.models import BillingProfile
+from datetime import datetime
+from ago import human
 # Create your models here.
 
 Order_Status=(
@@ -25,6 +28,7 @@ class Order(models.Model):
     shipping_total  =models.DecimalField(default=20.50, max_digits=5, decimal_places=2)
     total           =models.DecimalField(max_digits=7, decimal_places=2,default=0.0)
     active          =models.BooleanField(default =True)
+    timeStamp       =models.DateTimeField(auto_now=False, auto_now_add=True)
 
     def __str__(self):
         return self.order_id
@@ -50,6 +54,10 @@ class Order(models.Model):
             self.status='paid'
             self.save()
         return self.status
+
+    def time_ago(self):
+        duration = timezone.now() - self.timeStamp
+        return human(duration,2)
 
 def pre_save_reciever_id_gen(sender,instance,*args,**kwargs):
     if not instance.order_id:

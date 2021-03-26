@@ -13,6 +13,7 @@ from django.http import HttpResponse
 from django.views.generic import View
 from .utils import render_to_pdf
 from django.template.loader import get_template
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -89,3 +90,17 @@ def order_checkout(request):
         'address_qs':address_qs
     }
     return render(request,'order/checkout.html',responseData)
+
+@login_required
+def my_orders(request):
+    billing_profile_obj,is_created = BillingProfile.objects.new_or_get(request)
+    order_obj_qs = Order.objects.filter(billing_profle=billing_profile_obj).exclude(status="created").order_by("-timeStamp")
+    data = {
+        "my_orders" : order_obj_qs,
+    }
+    return render(request,'order/my_orders.html',data) 
+
+@login_required
+def order_detailView(request,order_id):
+    order_obj = Order.objects.get(order_id=order_id)
+    return render(request,'order/success.html',{"order":order_obj})

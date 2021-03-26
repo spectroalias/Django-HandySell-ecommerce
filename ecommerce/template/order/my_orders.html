@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+{% endblock %}
+{% block title %}
+My Products
+{% endblock %}
+{% block content %}
+<div class="container" style="padding-top: 5%;">
+    <strong style="color: white;">
+        <center>
+            <h1>Your Orders </h1>
+        </center>
+    </strong>
+    <div class="container jumbotron">
+        {% for item in my_orders %}
+        <div class="col-sm-4">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                    <h5 class="card-title"><a class="btn btn-success glyphicon glyphicon-menu-right" href="{% url 'order:invoice' order_id=item.order_id %}">Order ID: {{item.order_id}}</a></h5>
+                    <p class="card-text">Status: <u style="color: green;">{{item.status}}</u></p>
+                    <p class="card-text">
+                    <h4 style="color: gray;">
+                        Order Placed:{{ item.time_ago }}</h4>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <style>
+        table,
+        th,
+        td {
+            padding: 5px;
+        }
+
+        table {
+            border-spacing: 15px;
+        }
+    </style>
+
+    {% endblock %}
