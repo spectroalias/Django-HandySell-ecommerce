@@ -19,8 +19,11 @@ My Products
         <hr>
         <div class="container">
             {% for item in my_products %}
-            <div class="container">
-                <div style="float:left;">
+            <div class="row no-gutters bg-light position-relative">
+                <div class="col-md-6 mb-md-0 p-md-4">
+                    <img src={{item.image}} alt="{{item.title}}" class="h-10" style="height:250px;align-content: center; ">
+                </div>
+                <div class="col-md-6 position-static p-4 pl-md-0">
                     <table style="border-spacing: 15px;">
                         <tr>
                             <td>
@@ -65,11 +68,7 @@ My Products
                         </tr>
                     </table>
                 </div>
-                <div style="float: right;">
-                    <img src={{item.image}} alt="{{item.title}}" class="img-fluid" style="height:200px; ">
-                </div>
-            </div>
-            <hr>
+              </div>
             {% endfor %}
         </div>
     </div>

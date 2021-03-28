@@ -18,12 +18,14 @@ My Orders
         <div class="col-sm-6">
             <div class="card" style="width: 100%;">
                 <div class="card-body">
-                    <h5 class="card-title"><a class="btn btn-success glyphicon glyphicon-menu-right" href="{% url 'order:invoice' order_id=item.order_id %}">Order ID: {{item.order_id}}</a></h5>
-                    <p class="card-text">Status: <u style="color: green;">{{item.status}}</u></p>
-                    <p class="card-text">
-                    <h4 style="color: gray;">
-                        Order Placed:{{ item.time_ago }}</h4>
-                    </p>
+                    <a class="btn stretched-link" style="text-align: left;" href="{% url 'order:invoice' order_id=item.order_id %}">
+                        <h4>Order ID: {{item.order_id}}</h4>
+                        <p class="card-text" style="color: rgba(73, 125, 181, 0.796);">Status: <u style="color: green;">{{item.status}}</u></p>
+                        <p class="card-text">
+                        <h4 style="color: gray;">
+                            Order Placed:{{ item.time_ago }}</h4>
+                        </p>
+                    </a>
                 </div>
             </div>
         </div>
