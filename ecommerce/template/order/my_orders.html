@@ -4,7 +4,7 @@
 <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 {% endblock %}
 {% block title %}
-My Products
+My Orders
 {% endblock %}
 {% block content %}
 <div class="container" style="padding-top: 5%;">
@@ -15,7 +15,7 @@ My Products
     </strong>
     <div class="container jumbotron">
         {% for item in my_orders %}
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <div class="card" style="width: 100%;">
                 <div class="card-body">
                     <h5 class="card-title"><a class="btn btn-success glyphicon glyphicon-menu-right" href="{% url 'order:invoice' order_id=item.order_id %}">Order ID: {{item.order_id}}</a></h5>

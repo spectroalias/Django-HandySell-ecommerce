@@ -51,6 +51,8 @@
       {% endblock %}
     </div>
     <!-- footer -->
-    {% include 'footer.html' %}
-  </body>
+    {% if not user.is_authenticated %}
+      {% include 'footer.html' %}
+    {% endif %}
+    </body>
 </html>
