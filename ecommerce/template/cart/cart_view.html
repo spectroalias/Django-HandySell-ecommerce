@@ -16,11 +16,11 @@ My Cart
     <div class="jumbotron">
         <div class="container">
             {% for item in cart.products.all %}
-            <div class="container">
-                <div style="float: left;">
-                    <img src={{item.image}} alt="{{item.title}}" class="img-fluid" style="height:100px; ">
+            <div class="row no-gutters bg-light position-relative">
+                <div class="col-md-6 mb-md-0 p-md-4">
+                    <img src={{item.image}} alt="{{item.title}}" style="height: 200px;">
                 </div>
-                <div style="text-align:left;">
+                <div class="col-md-6 position-static p-4 pl-md-0">
                     <table style="border-spacing: 15px;">
                         <tr>
                             <td>
@@ -46,13 +46,15 @@ My Cart
                                 {{item.price}} INR
                             </td>
                         </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                {% include 'cart/cart_update.html' with product=item cart=cart next=request.path %}
+                            </td>
+                        </tr>
                     </table>
                 </div>
-                <div style="float: right;">
-                    {% include 'cart/cart_update.html' with product=item cart=cart next=request.path %}
-                </div>
             </div>
-            <hr>
             {% endfor %}
         </div>
         <div class='container'>
