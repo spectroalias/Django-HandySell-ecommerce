@@ -49,7 +49,6 @@ def order_checkout(request):
     guest_user_form=GuestForm()
     ship_add_form=AddressForm()
     bill_add_form=AddressForm()
-    
     billing_address_id = request.session.get("billing_address_id", None)
     shipping_address_id = request.session.get("shipping_address_id", None)
     bill_profile,created = BillingProfile.objects.new_or_get(request)

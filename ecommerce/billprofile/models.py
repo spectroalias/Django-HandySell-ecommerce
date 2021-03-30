@@ -10,19 +10,17 @@ class BillingProfileManager(models.Manager):
         gemail=request.session.get('guest_email_id')
         bill_profile=None
         new_bill = False
-        print(gemail)
         if user.is_authenticated:
             bill_profile,new_bill=BillingProfile.objects.get_or_create(user=user,email=user.email)
-
         elif gemail is not None:
-            
             guest=GuestUser.objects.filter(id=gemail)
             if guest.count() >=1 :
-                bill_profile,new_bill=BillingProfile.objects.get_or_create(email=gemail)
+                guest = guest.first()
+                bill_profile,new_bill=BillingProfile.objects.get_or_create(email=guest.email)
             else:
                 del request.session['guest_email_id']
         else:
-            pass
+            print("Error in making bill profile")
         return bill_profile,new_bill
 
 

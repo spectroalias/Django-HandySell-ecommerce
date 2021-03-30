@@ -23,7 +23,8 @@ Complete your checkout
             <td>
                 <div style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;">
                     <h4>
-                        {{ order.billing_profle.user }} ({{ order.billing_profle.user.email }})                  </h4>
+                        {% if order.billing_profle.user is not None %}{{ order.billing_profle.user }}{% else %}UnRegistered{% endif %} ({{ order.billing_profle.email }})                  
+                    </h4>
                 </div>
             </td>
         </tr>

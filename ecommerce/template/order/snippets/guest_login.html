@@ -1,5 +1,5 @@
  <form class="container jumbotron" method="POST" action='{% if action_url %} {{ action_url }}{% else %}{% url 'account:login' %}{% endif %}'>{% csrf_token %}
     {% if next_url %}<input type='hidden' name='next' value='{{ next_url }}'/>{% endif %}      
     <center>{{ form.as_table }}</center>
-    <center> <button id="submit" type="submit" class="btn btn-success">Guest Sign in</button></center>
+    <center> <button id="submit" type="submit" class="btn btn-success">Checkout as Guest</button></center>
 </form>
