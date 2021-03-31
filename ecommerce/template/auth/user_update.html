@@ -7,10 +7,10 @@
 Add Product
 {% endblock %}
 {% block content %}
-<form class="container container-my" style="color:white;" method="POST">
+<form class="container jumbotron container-my" style="color:black;" method="POST">
         <header class="heading">Update User Information</header><hr></hr>
             {{form.as_table}}
             {% csrf_token %}
-        <center> <button id="submit" type="submit" class="btn btn-primary">Update</button></center>
+        <button id="submit" type="submit" class="btn btn-primary">Update</button>
 </form>
 {% endblock %}

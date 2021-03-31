@@ -15,6 +15,8 @@ from .models import GuestUser
 
 # Create your views here.
 
+User = get_user_model()
+
 def about_us(request):
     return render(request,"about.html",{})
 
@@ -27,9 +29,9 @@ def LoginView(request):
     next_post=request.POST.get('next')
     redirect_urls=next_ or next_post or None
     if form.is_valid():
-        username = request.POST['username']
+        email = request.POST['email']
         password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
             try:
@@ -78,7 +80,7 @@ class UpdateUserView(LoginRequiredMixin,UpdateView):
     model = User
     fields=['username','email']
     template_name='auth/user_update.html'
-    success_url=reverse_lazy('home')
+    success_url=reverse_lazy('product:home')
 
 class UserDetailView(DetailView,LoginRequiredMixin):
     model=User
@@ -89,7 +91,8 @@ class UserDetailView(DetailView,LoginRequiredMixin):
 
 class DeleteUserView(DeleteView,LoginRequiredMixin):
     model = User
-    success_url=reverse_lazy('home')
+    success_url=reverse_lazy('product:home')
+    template_name = 'auth/user_confirm_delete.html'
 
 @login_required
 def change_password(request):
@@ -99,7 +102,7 @@ def change_password(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
-            return redirect('change_password')
+            return redirect('account:user_detail')
         else:
             messages.error(request, 'Please correct the error below.')
     else:
