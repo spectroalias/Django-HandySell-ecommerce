@@ -1,9 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from Product.models import Product
 from django.db.models.signals import m2m_changed,pre_save
-
 # Create your models here.
+
+User = get_user_model()
 
 class CartModel_Manager(models.Manager):
     def new_cart(self,user=None):

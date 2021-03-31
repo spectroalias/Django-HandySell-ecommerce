@@ -7,8 +7,10 @@ from django.utils.timezone import now
 from django.db.models.signals import pre_save, post_save
 from .utils import unique_slug_generator
 
+User = get_user_model()
+
 class Product(models.Model):
-    seller      = models.ForeignKey(get_user_model(),on_delete=models.CASCADE,default=User)
+    seller      = models.ForeignKey(User,on_delete=models.CASCADE,default=User)
     slug        = models.SlugField(blank=True, unique=True)
     title       = models.CharField(max_length=150)
     description = models.TextField(null=True)

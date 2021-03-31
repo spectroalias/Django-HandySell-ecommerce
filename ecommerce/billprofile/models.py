@@ -1,8 +1,10 @@
 from django.db import models
 from django.db.models.signals import post_save
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from accounts.models import GuestUser
 # Create your models here.
+
+User = get_user_model()
 
 class BillingProfileManager(models.Manager):
     def new_or_get(self,request):
