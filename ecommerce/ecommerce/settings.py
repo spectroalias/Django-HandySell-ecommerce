@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'billprofile',
     'addresses',
     'accounts',
+    'analysis',
     'Product',
     'search',
     'order',    

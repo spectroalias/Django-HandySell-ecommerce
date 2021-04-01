@@ -8,6 +8,7 @@ from .forms import ProductForm
 from django.contrib.auth import get_user
 from cart.models import Cart
 from .models import Product
+from analysis.mixins import ObjectViewMixin
 # Create your views here.
 
 
@@ -22,7 +23,7 @@ class ProductListView(ListView):
         context["cart"] = cart
         return context
 
-class ProductDetailView(DetailView):
+class ProductDetailView(ObjectViewMixin,DetailView):
     model=Product
     context_object_name='product'
     template_name = "Product/product_detail.html"
