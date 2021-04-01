@@ -53,7 +53,7 @@ def GuestView(request):
     redirect_urls=next_ or next_post or None
     if form.is_valid():
         email = form.cleaned_data.get('Email')
-        new_guest=GuestUser.objects.create(email=email)
+        new_guest,created=GuestUser.objects.get_or_create(email=email)
         request.session['guest_email_id']=new_guest.id
         if is_safe_url(redirect_urls,request.get_host()):
             return redirect(redirect_urls)
