@@ -78,6 +78,7 @@ def order_checkout(request):
             order_obj.status_paid()
             del request.session["cart_id"]
             request.session["cart_items"] = 0
+            del request.session['guest_email_id']
             return render(request,"order/success.html",{'order':order_obj})
     responseData = {
         'ship_add':ship_add_form,

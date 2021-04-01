@@ -23,13 +23,12 @@ def checkout_address_create(request):
             if request.POST.get('same_bill_add') and address_type == 'shipping':
                 add_obj= Address.objects.get(pk=instance.id)
                 if add_obj:
-                    add_obj.pk=None
-                    # add_obj.address_type='billing'
-                    add_obj.save()
+                    # add_obj.pk=None
+                    # # add_obj.address_type='billing'
+                    # add_obj.save()
                     request.session["billing_address_id"] = add_obj.id
                 else:
                     print("some happen with the add save .... re-enter of address required")
-            # print(request.POST.get(address_type+"_address_id")+request.POST.get("billing_address_id"))
         else :
             return redirect('order:checkout')
         if is_safe_url(redirect_urls,request.get_host()):
