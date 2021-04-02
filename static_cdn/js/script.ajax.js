@@ -16,9 +16,9 @@
 			success: function(data){
 				var buttonType = thisForm.find(".cartUpdate")
 				if (data.added){
-					buttonType.html("<button type='submit' class='btn btn-primary glyphicon glyphicon-cart'>Remove from cart</button>")
+					buttonType.html("<button type='submit' class='btn btn-primary glyphicon glyphicon-shopping-cart'> Remove from cart</button>")
 				}else {
-					buttonType.html("<button type='submit' class='btn btn-primary glyphicon glyphicon-cart'>Add to cart</button>")
+					buttonType.html("<button type='submit' class='btn btn-primary glyphicon glyphicon-shopping-cart'> Add to cart</button>")
 				}
 				$("#cartIcon").text(data.cart_count)
 				$(".subTotal").text(data.cart_total)

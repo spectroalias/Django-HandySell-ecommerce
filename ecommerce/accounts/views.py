@@ -20,8 +20,8 @@ User = get_user_model()
 def about_us(request):
     return render(request,"about.html",{})
 
-def contact_us(request):
-    return render(request,"contact.html",{})
+# def contact_us(request):
+#     return render(request,"contact.html",{})
 
 def LoginView(request):
     form=UserLoginForm(request.POST or None)

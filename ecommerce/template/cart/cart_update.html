@@ -4,9 +4,9 @@
     <input type='hidden' name='q' value='{{ request.GET.q }}'/>
     <div class="cartUpdate">
         {% if product in cart.products.all %}
-        <button type='submit' class='btn btn-primary glyphicon glyphicon-cart'>Remove from cart</button>
+        <button type='submit' class='btn btn-primary glyphicon glyphicon-shopping-cart'> Remove from cart</button>
         {% else %}
-        <button type='submit' class='btn btn-primary glyphicon glyphicon-cart'>Add to cart</button>
+        <button type='submit' class='btn btn-primary glyphicon glyphicon-shopping-cart'> Add to cart</button>
         {% endif %}
     </div>
 
