@@ -1,62 +1,65 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'product/product_detail.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'product/product_detail.css' %}" />
 {% endblock %}
 {% block title %}
 Product Details
 {% endblock %}
 {% block content %}
-<div class="card">
-        <div class="row">
-            <aside class="col-sm-6 border-right container">
-    <article class="gallery-wrap"> 
-    <div class="img-big-wrap">
-      <div><img src={{product.image}}></div>
-    </div> <!-- slider-product.// -->
-            </aside>
-            <aside class="col-sm-6 border-left container">
-    <article class="card-body p-5">
-        <h2 class="title mb-3">{{product.title}}</h2> 
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="img-big-wrap">
+        <img style="height:500px; width: 600px;" src={{product.image}}>
+      </div>
+    </div>
+      <div class="col-md-6">
+        <h2 class="title mb-3">{{product.title}}</h2>
         <h4 class="title mb-2">seller: <b>{{product.seller}}</b></h4>
         {% if user.is_authenticated and user == product.seller %}
-            <a href="{% url 'product:product_update' slug=product.slug %}" class="glyphicon glyphicon-edit">edit</a>
+        <a href="{% url 'product:product_update' slug=product.slug %}" class="glyphicon glyphicon-edit">edit</a>
         {% endif %}
-    <br><br>
-    <p class="price-detail-wrap"> 
-        <span class="price h3 text-warning"> 
+        <br><br>
+        <p class="price-detail-wrap">
+          <span class="price h3 text-warning">
             <span class="currency">Price: INR </span><span class="num">{{product.price}}</span>
-        </span> 
-    </p> <!-- price-detail-wrap .// -->
-    <dl class="item-property">
-      <dt><h3>Description</h3></dt>
-      <dd><h4>{{product.description}}</h4></dd>
-    </dl> <!-- item-property-hor .// -->
-    {% comment %} <dl class="param param-feature">
-      <dt>Color</dt>
-      <dd>Black and white</dd>
-    </dl>  <!-- item-property-hor .// --> {% endcomment %}
-    <dl class="param param-feature">
-      <dt>Delivery Possible</dt>
-      <dd>India,Russia,USA,and Europe</dd>
-    </dl>  <!-- item-property-hor .// -->
-    
+          </span>
+        </p> <!-- price-detail-wrap .// -->
+        <dl class="item-property">
+          <dt>
+            <h3>Description</h3>
+          </dt>
+          <dd>
+            <h4>{{product.description}}</h4>
+          </dd>
+        </dl> <!-- item-property-hor .// -->
+        {% comment %} <dl class="param param-feature">
+          <dt>Color</dt>
+          <dd>Black and white</dd>
+        </dl> <!-- item-property-hor .// --> {% endcomment %}
+        <dl class="param param-feature">
+          <dt>Delivery Possible</dt>
+          <dd>India,Russia,USA,and Europe</dd>
+        </dl> <!-- item-property-hor .// -->
+
         <div class="row">
-        <hr>
-        <div class ="container" style="float: left;">
+          <hr>
+          <div class="container" style="float: left;">
             {% include 'cart/cart_update.html' with product=product cart=cart next=request.path %}
             {% if user.is_authenticated %}
-        </div>
-        <hr>
-        <hr><hr><hr><hr>
-        {% comment %} <a href="{% url 'product:product_delete' slug=product.slug %}" class="btn btn-lg btn-danger text-uppercase"> <i class="fas fa-shopping-cart"></i> Delete</a> 
-        <a href="{% url 'add_comment' pk=product.pk %}" class="btn btn-lg btn-outline-primary text-uppercase"> <i class="fas fa-shopping-cart"></i> Add comment</a>
-        
-        {% endcomment %}
-        {% endif %}
-    </article> <!-- card-body.// -->
-            </aside> <!-- col.// -->
-        </div> <!-- row.// -->
-    </div> 
+          </div>
+          <br>
+          <br>
+          {% comment %} <a href="{% url 'product:product_delete' slug=product.slug %}"
+            class="btn btn-lg btn-danger text-uppercase"> <i class="fas fa-shopping-cart"></i> Delete</a>
+          <a href="{% url 'add_comment' pk=product.pk %}" class="btn btn-lg btn-outline-primary text-uppercase"> <i
+              class="fas fa-shopping-cart"></i> Add comment</a>
+          {% endcomment %}
+          {% endif %}
+        </div> <!-- col.// -->
+      </div> <!-- row.// -->
+    </div>
+  </div>
 </div>
 {% endblock %}
