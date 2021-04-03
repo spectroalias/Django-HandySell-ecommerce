@@ -1,10 +1,9 @@
 body {
-  line-height: 1.8;
   color: #f5f6f7;
 }
-.margin {margin-bottom: 25px;}
+.margin {margin-bottom: 15px;}
 .bg-1 { 
-  background-color: #1abc9c; /* Green */
+  background-color: #1a83bc; /* Green */
   color: #ffffff;
 }
 .bg-2 { 
