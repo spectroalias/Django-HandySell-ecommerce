@@ -1,5 +1,6 @@
 from .models import Product
 from django import forms
+from tinymce.widgets import TinyMCE
 
 class ProductForm(forms.ModelForm):
     class Meta:
@@ -7,7 +8,7 @@ class ProductForm(forms.ModelForm):
         fields=['title','description','price','image']
         widget={
             'title':forms.TextInput(),
-            'description':forms.Textarea(),
+            'description':forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30})),
             'price':forms.IntegerField(),
             'image':forms.URLField()
         }

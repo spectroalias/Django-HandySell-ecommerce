@@ -25,4 +25,5 @@ urlpatterns = [
     path('order/', include('order.urls',namespace='order')),
     path('order/add/', include('addresses.urls',namespace='address')),
     path('captcha/', include('captcha.urls')), # apt-get -y install libz-dev libjpeg-dev libfreetype6-dev python-dev
+    path('tinymce/', include('tinymce.urls')),
 ]

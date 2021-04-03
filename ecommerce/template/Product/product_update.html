@@ -2,6 +2,18 @@
 {% load static %}
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'product/product_create.css' %}"/>
+<script src="{% static 'tinymce/tinymce.min.js' %}"></script>
+<script>
+    tinyMCE.init({
+    mode: "textareas",
+    theme: "silver",
+    plugins: "spellchecker,directionality,paste,searchreplace",
+    language: "{{ language }}",
+    directionality: "{{ directionality }}",
+    spellchecker_languages : "{{ spellchecker_languages }}",
+    spellchecker_rpc_url : "{{ spellchecker_rpc_url }}"
+});
+</script>
 {% endblock %}
 {% block title %}
 Add Product
