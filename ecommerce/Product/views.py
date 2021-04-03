@@ -43,14 +43,10 @@ class ProductDetailView(ObjectViewMixin,DetailView):
 
 @login_required
 def deleteProduct(request,slug):
-    next_redirect = request.path
     product_obj = Product.objects.get(seller=request.user,slug=slug)
     if product_obj is not None and request.method == 'POST':
         product_obj.delete()
-        if is_safe_url(next_redirect,request.get_host()):
-            return redirect(next_redirect)
-        else:
-            return redirect('product:home')
+        return redirect("product:my_products")
     return render(request,'Product/product_confirm_delete.html',{})
 
 # class CreateProductView(LoginRequiredMixin,CreateView):
