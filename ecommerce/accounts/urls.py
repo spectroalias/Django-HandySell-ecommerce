@@ -1,5 +1,5 @@
 from .views import about_us,LogoutView,LoginView, RegisterView,UpdateUserView,UserDetailView,DeleteUserView,change_password,GuestView
-from django.urls import path 
+from django.urls import path ,include
 app_name = 'account'
 
 urlpatterns = [

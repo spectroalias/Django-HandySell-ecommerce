@@ -13,7 +13,7 @@ Login
           <center>{{ form.as_table }}</center>
           <center> <button id="submit" type="submit" class="btn btn-success">Sign in</button></center>
           {% if user.is_anonymous %}
-          <br><br><center><a href="{% url 'accounts:register' %}" role="button">- Not Having an account -</a></center>
+          <br><br><center><a style="color: yellow;" href="{% url 'accounts:register' %}" role="button">- Not Having an account -</a></center>
           {% endif %}
         </form>
 {% endblock %}

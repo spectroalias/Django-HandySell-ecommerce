@@ -1,21 +1,25 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from captcha.fields import CaptchaField,CaptchaTextInput
 
 User=get_user_model()
 class UserLoginForm(forms.Form):
     email=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control" ,"placeholder":"Enter Your Registered Email"}))
     password=forms.CharField(widget=forms.PasswordInput(attrs={"class":"form-control","placeholder":"Enter Your Password"}))
+    captcha = CaptchaField(widget=CaptchaTextInput(attrs={'class':'form-control', "placeholder":"Enter the captcha", 'style':"margin-top:5px;margin-bottom:15px;"}))
 
 class GuestForm(forms.Form):
     Email=forms.EmailField(widget=forms.TextInput(attrs={"class":"form-control mail","placeholder":"Type Your Email",'required':'True'}))
-
+    captcha = CaptchaField(widget=CaptchaTextInput(attrs={'class':'form-control', "placeholder":"Enter the captcha", 'style':"margin-top:5px;margin-bottom:15px;"}))
+    
 class UserRegisterForm(forms.Form):
     Username=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control name" ,"placeholder":"Enter Your Username"}))
     Email=forms.EmailField(widget=forms.TextInput(attrs={"class":"form-control mail","placeholder":"Type Your Email",'required':'True'}))
     Password=forms.CharField(widget=forms.PasswordInput(attrs={"class":"form-control pass","placeholder":"Enter Your Password"}))
     Confirm_password=forms.CharField(label="Confirm password",widget=forms.PasswordInput(attrs={"class":"form-control pass","placeholder":"Confirm Your Password"}))
-
+    captcha = CaptchaField(widget=CaptchaTextInput(attrs={'class':'form-control', "placeholder":"Enter the captcha", 'style':"margin-top:5px;margin-bottom:15px;"}))
+    
     class Meta:
         model = User
         fileds = ['email','username',]

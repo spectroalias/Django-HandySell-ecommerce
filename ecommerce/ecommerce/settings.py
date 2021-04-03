@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'addresses',
     'accounts',
     'analysis',
+    'captcha',
     'Product',
     'search',
     'order',    
