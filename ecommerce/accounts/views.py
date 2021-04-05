@@ -81,18 +81,23 @@ class UpdateUserView(LoginRequiredMixin,UpdateView):
     fields=['username','email']
     template_name='auth/user_update.html'
     success_url=reverse_lazy('product:home')
+    def get_object(self):
+        return get_object_or_404(User,username=self.request.user.username)
 
 class UserDetailView(DetailView,LoginRequiredMixin):
     model=User
     context_object_name='User'
     template_name = "auth/user_detail.html"
     def get_object(self):
-        return get_object_or_404(User,pk=self.kwargs.get('pk'))
+        return get_object_or_404(User,username=self.request.user.username)
+
 
 class DeleteUserView(DeleteView,LoginRequiredMixin):
     model = User
     success_url=reverse_lazy('product:home')
     template_name = 'auth/user_confirm_delete.html'
+    def get_object(self):
+        return get_object_or_404(User,username=self.request.user.username)
 
 @login_required
 def change_password(request):

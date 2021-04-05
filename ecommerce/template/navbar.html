@@ -16,7 +16,7 @@
               <a class="dropdown-toggle nav-link glyphicon glyphicon-user " role="button" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">{{user.username}}</a>
               <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
                 <li>
-                  <a class="dropdown-item glyphicon glyphicon-pencil" href="{% url 'accounts:user_detail' pk=user.pk %}" style="color: gray;"> My Profile</a>
+                  <a class="dropdown-item glyphicon glyphicon-pencil" href="{% url 'accounts:user_detail' %}" style="color: gray;"> My Profile</a>
                 </li>
                 <li>
                 <a class="dropdown-item glyphicon glyphicon-tasks" style="color: gray;" href="{% url 'product:my_products' %}"> My Products</a>
