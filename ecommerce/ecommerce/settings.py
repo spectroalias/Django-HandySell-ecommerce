@@ -31,16 +31,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.staticfiles',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.admin',
+    'django.contrib.auth',
     'billprofile',
     'addresses',
     'accounts',
     'analysis',
+    'userinfo',
     'captcha',
     'tinymce',
     'Product',
@@ -133,6 +134,7 @@ STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'static'),
 ]
 STATIC_ROOT=os.path.join(os.path.dirname(BASE_DIR),'static_cdn')
+MEDIA_ROOT =os.path.join(os.path.dirname(BASE_DIR),'Media')
 
 TINYMCE_JS_URL = os.path.join(STATIC_ROOT, "tinymce/tinymce.min.js")
 TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT,"tinymce")
