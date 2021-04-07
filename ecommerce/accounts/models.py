@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.db.models.signals import post_save,pre_save
+from userinfo.models import UserInfo
 
 # Create your models here.
 # class Usermodel(models.Model,User):
@@ -51,6 +53,7 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
+    userInfo = models.OneToOneField(UserInfo,null=True,blank=True,on_delete=models.CASCADE)
 
     objects = UserManager()
 
@@ -88,3 +91,9 @@ class GuestUser(models.Model):
 
     def __str__(self):
         return self.email
+
+def pre_save_Userinfo_binding(sender,instance,*args,**kwargs):
+    if instance.userInfo is None:
+        instance.userInfo = UserInfo.objects.create()
+        
+pre_save.connect(pre_save_Userinfo_binding,sender=User)

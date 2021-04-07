@@ -135,6 +135,7 @@ STATICFILES_DIRS=[
 ]
 STATIC_ROOT=os.path.join(os.path.dirname(BASE_DIR),'static_cdn')
 MEDIA_ROOT =os.path.join(os.path.dirname(BASE_DIR),'Media')
+MEDIA_URL = '/Media/'
 
 TINYMCE_JS_URL = os.path.join(STATIC_ROOT, "tinymce/tinymce.min.js")
 TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT,"tinymce")

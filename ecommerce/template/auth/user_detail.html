@@ -43,7 +43,7 @@ User Info
                             <h3 class="title mb-3">Gender: </h3>
                         </td>
                         <td>
-                            <h4> {% if userinfo.gender is None %}  -not specified-  {% else %}{{userinfo.gender}}{% endif %}</h4>
+                            <h4> {% if user.userInfo.gender is None %}  -not specified yet-  {% else %}{{ user.userInfo.gender }}{% endif %}</h4>
                         </td>
                     </tr>
                     <tr>
@@ -51,7 +51,7 @@ User Info
                             <h3 class="title mb-3">Contact Number: </h3>
                         </td>
                         <td>
-                            <h4> {% if userinfo.gender is None %}  -not specified-  {% else %}{{ userinfo.contact }}{% endif %}</h4>
+                            <h4> {% if user.userInfo.contact is None %}  -not specified yet-  {% else %}{{ user.userInfo.contact }}{% endif %}</h4>
                         </td>
                     </tr>
                 </table>
@@ -61,7 +61,7 @@ User Info
                 </div>
             </div>
             <div style="float:right;">
-                <img src="{{ userinfo.profile_pic.url }}" style="vertical-align:middle;width: 150px; height: 150px;border-radius: 50%;"  alt="">
+                <img src="{{ user.userInfo.profile_pic.url }}" style="vertical-align:middle;width: 150px; height: 150px;border-radius: 50%;"  alt="">
                 <h5 class="text-center">My Avatar</h5>
             </div>
     </div>

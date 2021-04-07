@@ -12,7 +12,8 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.core.exceptions import  ValidationError
 from django.utils.http import is_safe_url
 from .models import GuestUser
-
+from userinfo.models import UserInfo
+  
 # Create your views here.
 
 User = get_user_model()
@@ -90,7 +91,10 @@ class UserDetailView(DetailView,LoginRequiredMixin):
     template_name = "auth/user_detail.html"
     def get_object(self):
         return get_object_or_404(User,username=self.request.user.username)
-
+    # def get_context_data(self, **kwargs):
+    #     context = super(UserDetailView, self).get_context_data(**kwargs)
+    #     context['userinfo'] = UserInfo.objects.get_or_create(user=self.request.user,active=True)[0]
+    #     return context
 
 class DeleteUserView(DeleteView,LoginRequiredMixin):
     model = User

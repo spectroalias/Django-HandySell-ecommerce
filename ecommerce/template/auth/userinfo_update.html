@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'product/product_create.css' %}"/>
+{% endblock %}
+{% block title %}
+Update Personal Details
+{% endblock %}
+{% block content %}
+<form class="container jumbotron " style="color:black;" method="POST">
+        <header class="heading">Update Personal Information</header><hr></hr>
+            {{form.as_table}}
+            {% csrf_token %}
+        <button id="submit" type="submit" class="btn btn-primary">Update</button>
+</form>
+{% endblock %}
