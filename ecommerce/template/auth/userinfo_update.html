@@ -7,10 +7,35 @@
 Update Personal Details
 {% endblock %}
 {% block content %}
-<form class="jumbotron container" style="color:black;" method="POST" enctype="multipart/form-data">
+<form class="jumbotron container user-info-update" style="color:black;" method="POST" enctype="multipart/form-data">
     <header class="heading">Update Personal Information</header><hr>
-        {{form.as_table}}
-        {% csrf_token %}
-    <button id="submit" type="submit" class="btn btn-primary">Update</button>
+    {% csrf_token %}
+    <div class="row">
+        <div class="column" style="width: 50%;">
+            <img id="image-avatar-update" src="{{userInfo.profile_pic.url}}" alt="" style="border-radius: 50%;" height="300" width="300">
+        </div>
+        <div class="column" style="float: right; width: 50%;">
+            <table style="width: 100%;float:right;align-items: center;">
+                {{form.as_table}}
+                <tr>
+                    <td>
+                        <a href="{% url 'accounts:user_detail' %}" style="width: 100%;" class="btn btn-success glyphicon glyphicon-chevron-left">Back</a>
+                    </td>
+                    <td>
+                        <button id="submit" type="submit" style="width: 100%;" class="btn btn-primary">Update</button>
+                    </td>
+                </tr>
+            </table>
+        
+        </div>
+    </div>
 </form>
+<style>
+    table, th, td {
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+}
+</style>
 {% endblock %}

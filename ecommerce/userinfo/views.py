@@ -14,6 +14,8 @@ def UpdateUserInfoView(request):
         if form.is_valid():
             form.save()
             return redirect('accounts:user_detail')
+    else:
+        form = UserInfoForm(instance=userInfo_obj)
     data={
         'userInfo':userInfo_obj,
         'form':form,
