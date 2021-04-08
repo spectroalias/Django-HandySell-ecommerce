@@ -1,15 +1,23 @@
 from django.shortcuts import render
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
-from django.views.generic import UpdateView
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect , render
 from .models import UserInfo
+from .forms import UserInfoForm
+import os
 # Create your views here.
 
-class UpdateUserInfoView(LoginRequiredMixin,UpdateView):
-    model = UserInfo
-    fields=['profile_pic','gender','contact']
-    template_name='auth/userinfo_update.html'
-    success_url=reverse_lazy('accounts:user_detail')
-    def get_object(self):
-        userinfo_obj,created =  UserInfo.objects.get_or_create(pk=self.request.user.userInfo.id)
-        return userinfo_obj
+@login_required
+def UpdateUserInfoView(request):
+    userInfo_obj = UserInfo.objects.get(id=request.user.userInfo.id)
+    form = UserInfoForm(request.POST, request.FILES ,instance=userInfo_obj)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:user_detail')
+    data={
+        'userInfo':userInfo_obj,
+        'form':form,
+    }
+    return render(request,'auth/userinfo_update.html',context=data)
+
+    

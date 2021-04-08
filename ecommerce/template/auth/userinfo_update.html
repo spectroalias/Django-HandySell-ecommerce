@@ -7,10 +7,10 @@
 Update Personal Details
 {% endblock %}
 {% block content %}
-<form class="container jumbotron " style="color:black;" method="POST">
-        <header class="heading">Update Personal Information</header><hr></hr>
-            {{form.as_table}}
-            {% csrf_token %}
-        <button id="submit" type="submit" class="btn btn-primary">Update</button>
+<form class="jumbotron container" style="color:black;" method="POST" enctype="multipart/form-data">
+    <header class="heading">Update Personal Information</header><hr>
+        {{form.as_table}}
+        {% csrf_token %}
+    <button id="submit" type="submit" class="btn btn-primary">Update</button>
 </form>
 {% endblock %}

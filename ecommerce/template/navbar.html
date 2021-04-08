@@ -13,7 +13,10 @@
           <div class="navbar-nav" style="float: right;">
             {% if user.is_authenticated %}
             <div class="nav-item dropdown">
-              <a class="dropdown-toggle nav-link glyphicon glyphicon-user " role="button" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">{{user.username}}</a>
+              <a class="dropdown-toggle nav-link " role="button" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
+                <img src="{{ request.user.userInfo.profile_pic.url }}" width="25" height="25" style="background-color:white;border-radius: 50%;" alt="">
+                <b>{{user.username}}</b>
+              </a>
               <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
                 <li>
                   <a class="dropdown-item glyphicon glyphicon-pencil" href="{% url 'accounts:user_detail' %}" style="color: gray;"> My Profile</a>
