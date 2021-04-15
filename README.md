@@ -8,6 +8,6 @@ then run the Django project.
 
 ### The Screen shots are as follows:
 
-![Home Page](screenshots/page1.png)
+![Home Page](screenshots/page_home.png)
 
 more to come...
