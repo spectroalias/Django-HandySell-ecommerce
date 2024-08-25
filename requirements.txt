@@ -17,7 +17,7 @@ pytz==2021.1
 reportlab==3.5.66
 requests==2.25.1
 six==1.15.0
-sqlparse==0.4.2
+sqlparse==0.5.0
 stripe==2.56.0
 urllib3==1.26.5
 webencodings==0.5.1
