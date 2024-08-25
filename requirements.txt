@@ -9,7 +9,7 @@ django-simple-captcha==0.5.14
 django-tinymce==3.3.0
 future==0.18.2
 html5lib==1.1
-idna==2.10
+idna==3.7
 Pillow==9.0.0
 PyPDF2==1.26.0
 python-bidi==0.4.2
